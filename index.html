@@ -76,17 +76,54 @@
       margin-bottom: 30px;
     }
 
+    /* Custom form */
+    .custom-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .custom-form input {
+      background: #0f1115;
+      border: 1px solid #2b303b;
+      color: #e5e7eb;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .custom-form input::placeholder {
+      color: #6b7280;
+    }
+
+    .custom-form button {
+      background: #3b82f6;
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .custom-form button:hover {
+      background: #2563eb;
+    }
+
+    #form-success {
+      margin-top: 20px;
+      color: #22c55e;
+      display: none;
+    }
+
     footer {
       text-align: center;
       padding: 40px 20px;
       font-size: 13px;
       color: #6b7280;
       border-top: 1px solid #1f2937;
-    }
-
-    /* HubSpot form tweaks */
-    .hs-form-frame {
-      margin-top: 20px;
     }
   </style>
 </head>
@@ -111,22 +148,23 @@
   <div class="card">
     <h2>What you can test</h2>
     <p>
-      Anonymous page views, HubSpot cookies, form submissions,
+      Anonymous page views, HubSpot cookies, custom form submissions,
       lifecycle stages, workflows, and attribution logic.
     </p>
   </div>
 
   <div class="card cta-card">
     <h2>Convert to lead</h2>
-    <p>Submit the form below to create a real HubSpot contact</p>
+    <p>Fill the form below to create a real HubSpot contact</p>
 
-    <!-- HubSpot Form -->
-    <script src="https://js-eu1.hsforms.net/forms/embed/146828710.js" defer></script>
-    <div
-      class="hs-form-frame"
-      data-region="eu1"
-      data-form-id="add43d94-a32e-427c-888e-53be9f6c42ae"
-      data-portal-id="146828710">
+    <form id="lead-form" class="custom-form">
+      <input type="text" name="firstname" placeholder="First name" required>
+      <input type="email" name="email" placeholder="Email address" required>
+      <button type="submit">Submit</button>
+    </form>
+
+    <div id="form-success">
+      Thanks. Lead created successfully.
     </div>
   </div>
 
@@ -135,6 +173,37 @@
 <footer>
   HubSpot Demo Project · GitHub Pages · Dark developer mode
 </footer>
+
+<script>
+document.getElementById("lead-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const payload = {
+    fields: [
+      { name: "firstname", value: e.target.firstname.value },
+      { name: "email", value: e.target.email.value }
+    ],
+    context: {
+      pageUri: window.location.href,
+      pageName: document.title
+    }
+  };
+
+  fetch(
+    "https://api.hsforms.com/submissions/v3/integration/submit/146828710/add43d94-a32e-427c-888e-53be9f6c42ae",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }
+  ).then(res => {
+    if (res.ok) {
+      document.getElementById("lead-form").style.display = "none";
+      document.getElementById("form-success").style.display = "block";
+    }
+  });
+});
+</script>
 
 </body>
 </html>
