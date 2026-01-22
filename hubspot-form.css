@@ -1,4 +1,18 @@
-/* Labels */
+#hs-form-target form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+  padding: 26px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.25);
+}
+
+#hs-form-target .hs_email,
+#hs-form-target .hs_submit{
+  grid-column: 1 / -1;
+}
+
 #hs-form-target .hs-form-field > label{
   display: block !important;
   margin: 0 0 8px !important;
@@ -6,7 +20,19 @@
   color: rgba(229,231,235,0.85);
 }
 
-/* Center submit wrapper */
+#hs-form-target .hs-input,
+#hs-form-target input[type="text"],
+#hs-form-target input[type="email"]{
+  width: 100% !important;
+  height: 44px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: #e5e7eb;
+  outline: none;
+}
+
 #hs-form-target .hs-actions-centered{
   grid-column: 1 / -1;
   display: flex !important;
@@ -14,14 +40,12 @@
   margin-top: 12px;
 }
 
-/* Gray button + centered */
 #hs-form-target input[type="submit"],
-#hs-form-target button[type="submit"],
 #hs-form-target .hs-button{
   height: 44px;
   padding: 0 22px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.14) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
   background: rgba(255,255,255,0.14) !important;
   color: #e5e7eb !important;
   font-weight: 800;
@@ -29,7 +53,12 @@
 }
 
 #hs-form-target input[type="submit"]:hover,
-#hs-form-target button[type="submit"]:hover,
 #hs-form-target .hs-button:hover{
   background: rgba(255,255,255,0.18) !important;
+}
+
+@media (max-width: 640px){
+  #hs-form-target form{ grid-template-columns: 1fr; padding: 18px; }
+  #hs-form-target .hs_email,
+  #hs-form-target .hs_submit{ grid-column: auto; }
 }
