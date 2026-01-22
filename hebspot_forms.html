@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HubSpot Forms</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- HubSpot Tracking -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/146828710.js"></script>
+</head>
+
+<body>
+  <h1>HubSpot Lead Form</h1>
+
+  <form id="lead-form">
+    <input type="text" name="firstname" placeholder="First name" required>
+    <input type="email" name="email" placeholder="Email address" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="form-success" style="display:none;">
+    Thanks. Lead created successfully.
+  </div>
+
+  <script src="./hubspot_lead.js"></script>
+</body>
+</html>
