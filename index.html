@@ -5,15 +5,11 @@
   <title>Convert to lead</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- HubSpot tracking -->
   <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
 
-  <!-- Site styles -->
   <link rel="stylesheet" href="styles.css" />
-  <!-- HubSpot form styles -->
   <link rel="stylesheet" href="hubspot-form.css" />
 </head>
-
 <body>
 
   <header class="hero">
@@ -30,21 +26,65 @@
         <div id="hs-form-target"></div>
       </div>
 
-      <div class="fineprint">
-        Tracking and analytics handled by HubSpot.
-      </div>
+      <div class="fineprint">Tracking and analytics handled by HubSpot.</div>
     </section>
   </main>
 
-  <footer class="footer">
-    Demo environment · HubSpot forms via v2.js (DOM)
-  </footer>
+  <footer class="footer">Demo environment · HubSpot forms via v2.js</footer>
 
-  <!-- HubSpot form embed (DOM) -->
   <script src="https://js-eu1.hsforms.net/forms/v2.js" defer></script>
   <script>
+    function ensureLabels(formEl) {
+      const fields = formEl.querySelectorAll(".hs-form-field");
+      fields.forEach(field => {
+        const label = field.querySelector("label");
+        const input = field.querySelector("input, textarea, select");
+        if (!input) return;
+
+        const hasRealLabel = label && label.textContent && label.textContent.trim().length > 0;
+        if (hasRealLabel) return;
+
+        const name = (input.name || "").toLowerCase();
+        let text = input.getAttribute("placeholder") || "";
+
+        if (!text) {
+          if (name.includes("firstname")) text = "First name";
+          else if (name.includes("lastname")) text = "Last name";
+          else if (name.includes("email")) text = "Email";
+          else if (name.includes("phone")) text = "Phone";
+          else if (name.includes("company")) text = "Company";
+          else text = "Details";
+        }
+
+        const newLabel = document.createElement("label");
+        newLabel.textContent = text;
+        newLabel.setAttribute("for", input.id || "");
+        field.insertBefore(newLabel, field.firstChild);
+      });
+    }
+
+    function applyMarketingUI(formEl) {
+      // Button text
+      const btn = formEl.querySelector('input[type="submit"], button[type="submit"]');
+      if (btn) {
+        if (btn.tagName.toLowerCase() === "input") btn.value = "Let’s talk!";
+        else btn.textContent = "Let’s talk!";
+      }
+
+      // Center submit area no matter what HubSpot class names are
+      const actions =
+        formEl.querySelector(".hs_submit") ||
+        formEl.querySelector(".actions") ||
+        (btn ? btn.parentElement : null);
+
+      if (actions) actions.classList.add("hs-actions-centered");
+
+      // Ensure labels exist
+      ensureLabels(formEl);
+    }
+
     window.addEventListener("load", () => {
-      if (!window.hbspt || !window.hbspt.forms || !window.hbspt.forms.create) return;
+      if (!window.hbspt?.forms?.create) return;
 
       window.hbspt.forms.create({
         region: "eu1",
@@ -53,19 +93,17 @@
         target: "#hs-form-target",
         css: "",
 
-        onFormReady: function($form){
-          const formEl = ($form instanceof HTMLElement) ? $form : document.querySelector("#hs-form-target form");
+        onFormReady: function(form) {
+          const formEl =
+            form instanceof HTMLElement
+              ? form.querySelector("form") || form
+              : document.querySelector("#hs-form-target form");
+
           if (!formEl) return;
-
-          const submit = formEl.querySelector('input[type="submit"]');
-          if (submit) submit.value = "Let’s talk!";
-
-          // Ensure labels are visible (HubSpot sometimes allows hiding labels via settings)
-          formEl.classList.add("hs-labels-on");
+          applyMarketingUI(formEl);
         }
       });
     });
   </script>
-
 </body>
 </html>
