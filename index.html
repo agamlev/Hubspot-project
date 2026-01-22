@@ -7,14 +7,13 @@
 
   <style>
     :root{
-      --bg: #0b0f14;
-      --panel: #0f1722;
-      --text: #e6edf6;
+      --bg:#0b0f14;
+      --panel:#0f1722;
+      --text:#e6edf6;
       --muted:#9aa7b8;
       --border:#1f2a3a;
 
-      /* Button tuned to match dark background */
-      --btn-bg: rgba(11,15,20,.75);
+      --btn-bg: rgba(11,15,20,.78);
       --btn-bg-hover: rgba(11,15,20,.92);
       --btn-border: rgba(125,211,252,.55);
       --btn-border-hover: rgba(125,211,252,.85);
@@ -59,79 +58,93 @@
       padding: 18px;
     }
 
-    /* HubSpot form styling */
-    .hs-form *{ font-family: var(--font) !important; }
+    /* Scoped HubSpot styling (works when the form is not inside an iframe) */
+    .hs-form-html .hs-form *{ font-family: var(--font) !important; }
 
-    .hs-form fieldset{ max-width: 100% !important; }
-    .hs-form .hs-form-field{ margin-bottom: 14px; }
+    .hs-form-html .hs-form fieldset{ max-width: 100% !important; }
+    .hs-form-html .hs-form .hs-form-field{ margin-bottom: 14px; }
 
-    .hs-form label{
+    .hs-form-html .hs-form label{
       display:block;
-      margin: 0 0 6px;
-      font-size: 13px;
+      margin:0 0 6px;
+      font-size:13px;
       color: var(--muted);
     }
 
-    .hs-form .hs-input,
-    .hs-form input[type="text"],
-    .hs-form input[type="email"],
-    .hs-form input[type="tel"],
-    .hs-form textarea,
-    .hs-form select{
-      width: 100% !important;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(11,15,20,.55);
-      color: var(--text);
-      outline: none;
+    .hs-form-html .hs-form input,
+    .hs-form-html .hs-form textarea,
+    .hs-form-html .hs-form select{
+      width:100% !important;
+      padding:12px 12px !important;
+      border-radius:14px !important;
+      border:1px solid var(--border) !important;
+      background: rgba(11,15,20,.55) !important;
+      color: var(--text) !important;
+      outline:none !important;
       transition: border-color .15s ease, box-shadow .15s ease;
     }
 
-    .hs-form textarea{ min-height: 110px; resize: vertical; }
+    .hs-form-html .hs-form textarea{ min-height: 110px; resize: vertical; }
 
-    .hs-form .hs-input:focus,
-    .hs-form input:focus,
-    .hs-form textarea:focus,
-    .hs-form select:focus{
-      border-color: rgba(125,211,252,.55);
-      box-shadow: 0 0 0 6px rgba(125,211,252,.10);
+    .hs-form-html .hs-form input:focus,
+    .hs-form-html .hs-form textarea:focus,
+    .hs-form-html .hs-form select:focus{
+      border-color: rgba(125,211,252,.55) !important;
+      box-shadow: 0 0 0 6px rgba(125,211,252,.10) !important;
     }
 
-    /* Button updated to match background */
-    .hs-form .hs-button{
-      width: 100% !important;
-      padding: 12px 14px !important;
-      border-radius: 14px !important;
-      border: 1px solid var(--btn-border) !important;
+    .hs-form-html .hs-form .hs-button,
+    .hs-form-html .hs-form input[type="submit"],
+    .hs-form-html .hs-form button{
+      width:100% !important;
+      padding:12px 14px !important;
+      border-radius:14px !important;
+      border:1px solid var(--btn-border) !important;
       background: var(--btn-bg) !important;
       color: var(--text) !important;
-      font-weight: 700 !important;
-      letter-spacing: .2px !important;
-      cursor: pointer !important;
+      font-weight:700 !important;
+      letter-spacing:.2px !important;
+      cursor:pointer !important;
       transition: box-shadow .15s ease, border-color .15s ease, background .15s ease, transform .05s ease;
     }
-    .hs-form .hs-button:hover{
+
+    .hs-form-html .hs-form .hs-button:hover,
+    .hs-form-html .hs-form input[type="submit"]:hover,
+    .hs-form-html .hs-form button:hover{
       border-color: var(--btn-border-hover) !important;
       background: var(--btn-bg-hover) !important;
-      box-shadow: 0 0 0 7px rgba(125,211,252,.10);
-    }
-    .hs-form .hs-button:active{ transform: translateY(1px); }
-
-    .hs-form .hs-error-msgs{ margin: 8px 0 0; padding: 0; list-style: none; }
-    .hs-form .hs-error-msgs label{
-      color: #fb7185;
-      font-size: 12px;
-      margin: 6px 0 0;
+      box-shadow: 0 0 0 7px rgba(125,211,252,.10) !important;
     }
 
-    .hs-form .legal-consent-container,
-    .hs-form .hs-richtext{
+    .hs-form-html .hs-form .hs-button:active,
+    .hs-form-html .hs-form input[type="submit"]:active,
+    .hs-form-html .hs-form button:active{
+      transform: translateY(1px);
+    }
+
+    .hs-form-html .hs-form .hs-error-msgs{ margin: 8px 0 0; padding: 0; list-style: none; }
+    .hs-form-html .hs-form .hs-error-msgs label{
+      color: #fb7185 !important;
+      font-size: 12px !important;
+      margin: 6px 0 0 !important;
+    }
+
+    .hs-form-html .hs-form .legal-consent-container,
+    .hs-form-html .hs-form .hs-richtext{
+      color: var(--muted) !important;
+      font-size: 12px !important;
+      margin-top: 10px !important;
+    }
+    .hs-form-html .hs-form a{ color: rgba(125,211,252,.95) !important; }
+
+    /* If HubSpot injects an iframe, show a clear hint */
+    .hint{
+      margin-top: 12px;
       color: var(--muted);
       font-size: 12px;
-      margin-top: 10px;
+      display:none;
     }
-    .hs-form .legal-consent-container a{ color: rgba(125,211,252,.95); }
+    .hint.show{ display:block; }
   </style>
 </head>
 
@@ -140,65 +153,37 @@
     <h1>agam hubspot test</h1>
 
     <div class="card">
-      <div id="hubspotForm"></div>
+      <div class="hs-form-html"
+           data-region="eu1"
+           data-form-id="fea75d46-afb0-4038-8af4-9057aff3cb3d"
+           data-portal-id="146828710"></div>
+
+      <div class="hint" id="iframeHint">
+        Form appears to be inside an iframe. In that case, page CSS cannot style the inner form fields.
+        Use HubSpot form styling settings, or render with forms/v2.js instead.
+      </div>
     </div>
   </div>
 
-  <!-- HubSpot Forms v2 -->
-  <script charset="utf-8" type="text/javascript" src="https://js-eu1.hsforms.net/forms/v2.js"></script>
+  <!-- HubSpot embed (developer) -->
+  <script src="https://js-eu1.hsforms.net/forms/embed/developer/146828710.js" defer></script>
 
   <script>
-    // Optional: force labels if the form doesn't render them (fallback)
-    const LABEL_MAP = {
-      firstname: "First name",
-      lastname: "Last name",
-      email: "Email",
-      phone: "Phone",
-      company: "Company",
-      message: "Message"
-    };
+    // Detect whether HubSpot rendered inside an iframe
+    (function () {
+      const host = document.querySelector('.hs-form-html');
+      const hint = document.getElementById('iframeHint');
+      if (!host) return;
 
-    function ensureLabels(formEl){
-      const fields = formEl.querySelectorAll(".hs-form-field");
-      fields.forEach(field => {
-        const input = field.querySelector("input, textarea, select");
-        if(!input) return;
-
-        let label = field.querySelector("label");
-        if(label && label.textContent.trim().length > 0) return;
-
-        const name = (input.getAttribute("name") || "").toLowerCase();
-        const placeholder = (input.getAttribute("placeholder") || "").trim();
-        const text = LABEL_MAP[name] || placeholder || "Field";
-
-        if(!input.id){
-          input.id = "hs_" + Math.random().toString(16).slice(2);
-        }
-
-        label = document.createElement("label");
-        label.setAttribute("for", input.id);
-        label.textContent = text;
-
-        field.insertBefore(label, field.firstChild);
-
-        if(!placeholder){
-          input.setAttribute("placeholder", text);
-        }
+      const obs = new MutationObserver(() => {
+        const hasIframe = !!host.querySelector('iframe');
+        const hasForm = !!host.querySelector('form');
+        if (hasIframe && hint) hint.classList.add('show');
+        if (hasForm || hasIframe) obs.disconnect();
       });
-    }
 
-    hbspt.forms.create({
-      region: "eu1",
-      portalId: "146828710",
-      formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
-      target: "#hubspotForm",
-      css: "",
-
-      onFormReady: function($form){
-        const formEl = $form && $form[0] ? $form[0] : document.querySelector("#hubspotForm form");
-        if(formEl) ensureLabels(formEl);
-      }
-    });
+      obs.observe(host, { childList: true, subtree: true });
+    })();
   </script>
 </body>
 </html>
