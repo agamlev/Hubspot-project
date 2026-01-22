@@ -1,28 +1,51 @@
 (function () {
-  const form = document.getElementById("lead-form");
-  const successEl = document.getElementById("form-success");
-  const errorEl = document.getElementById("form-error");
-  const submitBtn = document.getElementById("lead-submit");
+  function $(id) {
+    return document.getElementById(id);
+  }
 
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  const form = $("lead-form");
   if (!form) return;
+
+  const successEl = $("form-success");
+  const errorEl = $("form-error");
+  const submitBtn = $("lead-submit");
+
+  function hide(el) {
+    if (el) el.style.display = "none";
+  }
+
+  function show(el) {
+    if (el) el.style.display = "block";
+  }
+
+  function setSubmitting(isSubmitting) {
+    if (!submitBtn) return;
+    submitBtn.disabled = isSubmitting;
+    submitBtn.textContent = isSubmitting ? "Sending..." : "Submit";
+  }
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    if (successEl) successEl.style.display = "none";
-    if (errorEl) errorEl.style.display = "none";
+    hide(successEl);
+    hide(errorEl);
+    setSubmitting(true);
 
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending...";
-    }
+    const firstname = e.target.firstname?.value || "";
+    const email = e.target.email?.value || "";
 
     const payload = {
       fields: [
-        { name: "firstname", value: e.target.firstname.value },
-        { name: "email", value: e.target.email.value }
+        { name: "firstname", value: firstname },
+        { name: "email", value: email }
       ],
       context: {
+        hutk: getCookie("hubspotutk"),
         pageUri: window.location.href,
         pageName: document.title
       }
@@ -41,14 +64,11 @@
       if (!res.ok) throw new Error("HubSpot submission failed");
 
       form.style.display = "none";
-      if (successEl) successEl.style.display = "block";
+      show(successEl);
     } catch (err) {
-      if (errorEl) errorEl.style.display = "block";
+      show(errorEl);
     } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Submit";
-      }
+      setSubmitting(false);
     }
   });
 })();
