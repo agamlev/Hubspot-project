@@ -1,55 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Convert to lead</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+:root{
+  --bg: #0f1115;
+  --panel: #141824;
+  --panel-2: #0f1115;
+  --text: #e5e7eb;
+  --muted: #a3a9b6;
+  --border: rgba(255,255,255,0.10);
+  --shadow: 0 18px 60px rgba(0,0,0,0.45);
+  --radius: 18px;
+  --max: 980px;
 
-  <!-- HubSpot tracking -->
-  <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
+  --brand: #7c3aed;
+  --brand-2: #a78bfa;
+  --focus: rgba(167, 139, 250, 0.35);
+}
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
-</head>
+*{ box-sizing: border-box; }
+html,body{ height: 100%; }
 
-<body>
+body{
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(900px 600px at 10% 0%, rgba(124,58,237,0.18), transparent 60%),
+    radial-gradient(700px 520px at 90% 20%, rgba(167,139,250,0.12), transparent 55%),
+    linear-gradient(180deg, #0b0d12, var(--bg));
+}
 
-  <header class="hero">
-    <h1>Convert to lead</h1>
-    <p>Fill the form below to create a real HubSpot contact</p>
-  </header>
+.hero{
+  padding: 72px 20px 36px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 55%);
+}
 
-  <main class="container">
-    <section class="card cta-card">
+.hero h1{
+  margin: 0 0 10px;
+  font-size: clamp(30px, 4vw, 42px);
+  letter-spacing: -0.02em;
+}
 
-      <h2>Get early access</h2>
-      <p>Leave your details and we’ll be in touch shortly</p>
+.hero p{
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
 
-      <div class="hs-embed-wrap">
-        <div id="hs-form-target"></div>
-      </div>
+.container{
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 28px 20px 44px;
+}
 
-      <div class="fineprint">
-        Tracking and analytics handled by HubSpot.
-      </div>
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
 
-    </section>
-  </main>
+.cta-card{
+  padding: 22px;
+}
 
-  <footer class="footer">
-    Demo environment · HubSpot forms via forms/v2.js
-  </footer>
+.cta-card h2{
+  margin: 0 0 6px;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
 
-  <!-- HubSpot form embed (DOM, not iframe) -->
-  <script src="https://js-eu1.hsforms.net/forms/v2.js"></script>
-  <script>
-    hbspt.forms.create({
-      region: "eu1",
-      portalId: "146828710",
-      formId: "d69ef3c9-26f7-4c2f-82a9-96c2f71c53f5",
-      target: "#hs-form-target"
-    });
-  </script>
+.cta-card > p{
+  margin: 0 0 18px;
+  color: var(--muted);
+}
 
-</body>
-</html>
+.fineprint{
+  margin-top: 14px;
+  font-size: 12px;
+  color: rgba(229,231,235,0.65);
+}
+
+.footer{
+  padding: 18px 20px 26px;
+  text-align: center;
+  color: rgba(229,231,235,0.55);
+  font-size: 12px;
+}
