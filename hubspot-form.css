@@ -1,0 +1,38 @@
+/* Wrapper שמחזיק את הטופס */
+.hs-embed-wrap{
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: calc(var(--radius) - 6px);
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(15,17,21,0.55);
+}
+
+/* שורת טעינה עד שה iframe מגיע */
+.hs-form-frame:empty{
+  min-height: 320px;
+  position: relative;
+}
+.hs-form-frame:empty::after{
+  content: "Loading form...";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(229,231,235,0.65);
+  font-size: 13px;
+}
+
+/* iframe עצמו */
+.hs-form-frame iframe{
+  width: 100% !important;
+  max-width: 100% !important;
+  border: 0 !important;
+  border-radius: 12px;
+  background: transparent;
+}
+
+/* רספונסיביות */
+@media (max-width: 520px){
+  .cta-card{ padding: 16px; }
+  .hs-embed-wrap{ padding: 12px; }
+}
