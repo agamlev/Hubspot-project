@@ -1,0 +1,170 @@
+:root{
+  --bg: #0f1115;
+  --panel: #161a22;
+  --panel2: #111318;
+  --border: #1f2937;
+  --border2: #2b303b;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --muted2: #6b7280;
+  --accent: #3b82f6;
+  --shadow: rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(59,130,246,0.18), transparent 60%),
+              radial-gradient(800px 500px at 20% 10%, rgba(34,197,94,0.08), transparent 60%),
+              var(--bg);
+  color: var(--text);
+}
+
+.hero{
+  padding: 72px 20px 64px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(26,29,36,0.9), rgba(15,17,21,0.9));
+}
+
+.hero h1{
+  margin: 0;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hero p{
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.container{
+  max-width: 960px;
+  margin: -44px auto 72px;
+  padding: 0 20px;
+}
+
+.card{
+  background: linear-gradient(180deg, rgba(22,26,34,0.9), rgba(17,19,24,0.9));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 42px;
+  box-shadow: 0 10px 30px var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(600px 200px at 50% 0%, rgba(59,130,246,0.25), transparent 60%);
+  pointer-events:none;
+  opacity: 0.8;
+}
+
+.cta-card{
+  text-align: center;
+  border: 1px solid rgba(43,48,59,0.9);
+}
+
+.cta-card h2{
+  margin: 0 0 10px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+.cta-card p{
+  margin: 0 0 26px;
+  color: var(--muted);
+  line-height: 1.6;
+  position: relative;
+}
+
+.hs-embed-wrap{
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(15,17,21,0.7);
+  border: 1px solid var(--border2);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.hs-embed-wrap.is-ready{
+  background: rgba(15,17,21,0.55);
+}
+
+.hs-embed-wrap .hs-form-frame{
+  position: relative;
+  z-index: 1;
+}
+
+/* HubSpot embed usually injects an iframe. We style the iframe wrapper and the iframe itself. */
+.hs-embed-wrap iframe{
+  width: 100% !important;
+  min-height: 520px;
+  border: 1px solid rgba(43,48,59,0.9) !important;
+  border-radius: 12px !important;
+  background: rgba(15,17,21,0.4);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+}
+
+/* Loading overlay */
+.hs-loading{
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(17,19,24,0.92), rgba(15,17,21,0.92));
+  border: 1px solid rgba(43,48,59,0.9);
+  z-index: 2;
+}
+
+.hs-loading.is-hidden{
+  display: none;
+}
+
+.hs-spinner{
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid rgba(156,163,175,0.25);
+  border-top-color: rgba(59,130,246,0.95);
+  animation: spin 0.9s linear infinite;
+}
+
+.hs-loading-text{
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@keyframes spin{
+  to { transform: rotate(360deg); }
+}
+
+.fineprint{
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--muted2);
+  position: relative;
+}
+
+.footer{
+  text-align: center;
+  padding: 42px 20px;
+  color: var(--muted2);
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+}
