@@ -1,66 +1,101 @@
-<script>
-  function applyCustomLabelsAndCTA(formEl) {
-    const setLabel = (selector, text) => {
-      const input = formEl.querySelector(selector);
-      if (!input) return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convert to lead</title>
 
-      const field =
-        input.closest(".hs-form-field") ||
-        input.closest(".field") ||
-        input.parentElement;
+  <!-- HubSpot tracking -->
+  <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
 
-      if (!field) return;
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="hubspot-form.css" />
+</head>
 
-      const existing = field.querySelector(":scope > label");
-      if (existing && existing.textContent.trim()) {
-        existing.textContent = text;
-        return;
+<body>
+  <header class="hero">
+    <h1>Convert to lead</h1>
+    <p>Fill the form below to create a real HubSpot contact</p>
+  </header>
+
+  <main class="container">
+    <section class="card cta-card">
+      <h2>Get early access</h2>
+      <p>Leave your details and we’ll be in touch shortly</p>
+
+      <div class="hs-embed-wrap">
+        <div id="hs-form-target"></div>
+      </div>
+
+      <div class="fineprint">Tracking and analytics handled by HubSpot.</div>
+    </section>
+  </main>
+
+  <footer class="footer">Demo environment · HubSpot forms via v2.js</footer>
+
+  <script src="https://js-eu1.hsforms.net/forms/v2.js" defer></script>
+
+  <script>
+    function applyLabelsAndButton(formEl) {
+      function setLabel(inputSelector, text) {
+        const input = formEl.querySelector(inputSelector);
+        if (!input) return;
+
+        const field = input.closest(".hs-form-field") || input.parentElement;
+        if (!field) return;
+
+        let label = field.querySelector(":scope > label");
+        if (!label) {
+          label = document.createElement("label");
+          field.insertBefore(label, field.firstChild);
+        }
+        label.textContent = text;
+        if (input.id) label.setAttribute("for", input.id);
       }
 
-      const lbl = document.createElement("label");
-      lbl.textContent = text;
-      if (input.id) lbl.setAttribute("for", input.id);
-      field.insertBefore(lbl, field.firstChild);
-    };
+      setLabel('input[name="firstname"], input[id*="firstname"]', "Name");
+      setLabel('input[name="lastname"], input[id*="lastname"]', "Last name");
+      setLabel('input[name="email"], input[type="email"], input[id*="email"]', "Email");
 
-    // Labels
-    setLabel('input[name="firstname"], input[name="first_name"], input[id*="firstname"]', "Name");
-    setLabel('input[name="lastname"], input[name="last_name"], input[id*="lastname"]', "Last name");
-    setLabel('input[name="email"], input[type="email"], input[id*="email"]', "Email");
+      const btn = formEl.querySelector('input[type="submit"], button[type="submit"]');
+      if (btn) {
+        const cta = "Let’s talk!";
+        if (btn.tagName.toLowerCase() === "input") btn.value = cta;
+        else btn.textContent = cta;
 
-    // Button text + center hook
-    const btn = formEl.querySelector('input[type="submit"], button[type="submit"]');
-    if (btn) {
-      const cta = "Let’s talk!";
-      if (btn.tagName.toLowerCase() === "input") btn.value = cta;
-      else btn.textContent = cta;
-
-      const wrap =
-        btn.closest(".hs_submit") ||
-        btn.closest(".actions") ||
-        btn.parentElement;
-
-      if (wrap) wrap.classList.add("hs-actions-centered");
+        const wrap = btn.closest(".hs_submit") || btn.closest(".actions") || btn.parentElement;
+        if (wrap) wrap.classList.add("hs-actions-centered");
+      }
     }
-  }
 
-  window.addEventListener("load", () => {
-    if (!window.hbspt?.forms?.create) return;
+    function mountHubSpotForm() {
+      if (!window.hbspt || !window.hbspt.forms || !window.hbspt.forms.create) return false;
 
-    window.hbspt.forms.create({
-      region: "eu1",
-      portalId: "146828710",
-      formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
-      target: "#hs-form-target",
-      css: "",
-      onFormReady: function(container) {
-        const formEl =
-          (container instanceof HTMLElement && (container.matches("form") ? container : container.querySelector("form"))) ||
-          document.querySelector("#hs-form-target form");
+      window.hbspt.forms.create({
+        region: "eu1",
+        portalId: "146828710",
+        formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
+        target: "#hs-form-target",
+        css: "",
+        onFormReady: function(container) {
+          const formEl =
+            (container instanceof HTMLElement && (container.matches("form") ? container : container.querySelector("form"))) ||
+            document.querySelector("#hs-form-target form");
+          if (!formEl) return;
+          applyLabelsAndButton(formEl);
+        }
+      });
 
-        if (!formEl) return;
-        applyCustomLabelsAndCTA(formEl);
-      }
-    });
-  });
-</script>
+      return true;
+    }
+
+    (function boot(){
+      let tries = 0;
+      const t = setInterval(() => {
+        tries += 1;
+        if (mountHubSpotForm() || tries >= 60) clearInterval(t);
+      }, 100);
+    })();
+  </script>
+</body>
+</html>
