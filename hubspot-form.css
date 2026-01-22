@@ -1,24 +1,29 @@
-/* Container */
+/* Wrapper */
+.hs-embed-wrap{
+  margin-top: 10px;
+}
+
+/* Form container */
 #hs-form-target form{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 18px;
   padding: 26px;
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(0,0,0,0.25);
 }
 
-/* Fields */
-#hs-form-target .hs-form-field{
-  margin: 0;
+/* Grid layout */
+#hs-form-target form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
 }
 
-/* Make common fields full width */
+/* Full-width common fields */
 #hs-form-target .hs_email,
 #hs-form-target .hs_phone,
 #hs-form-target .hs_company,
-#hs-form-target .hs_message{
+#hs-form-target .hs_message,
+#hs-form-target .hs_submit{
   grid-column: 1 / -1;
 }
 
@@ -28,6 +33,11 @@
   margin: 0 0 8px !important;
   font-size: 13px;
   color: rgba(229,231,235,0.80);
+}
+
+/* Field spacing */
+#hs-form-target .hs-form-field{
+  margin: 0;
 }
 
 /* Inputs */
@@ -62,15 +72,14 @@
   box-shadow: 0 0 0 4px rgba(167,139,250,0.18);
 }
 
-/* Center submit no matter structure */
+/* Center submit */
 #hs-form-target .hs-actions-centered{
-  grid-column: 1 / -1;
   display: flex !important;
   justify-content: center !important;
   margin-top: 8px;
 }
 
-/* Button (covers most HubSpot variants) */
+/* Button */
 #hs-form-target input[type="submit"],
 #hs-form-target button[type="submit"],
 #hs-form-target .hs-button{
@@ -80,7 +89,8 @@
   border: 0 !important;
   background: #ff7a59 !important;
   color: #fff !important;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.2px;
   cursor: pointer;
 }
 
@@ -103,10 +113,12 @@
     grid-template-columns: 1fr;
     padding: 18px;
   }
+
   #hs-form-target .hs_email,
   #hs-form-target .hs_phone,
   #hs-form-target .hs_company,
-  #hs-form-target .hs_message{
+  #hs-form-target .hs_message,
+  #hs-form-target .hs_submit{
     grid-column: auto;
   }
 }
