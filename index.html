@@ -1,178 +1,59 @@
-<!doctype html>
-<html lang="he" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HubSpot Form Dark Landing</title>
+<style>
+.hs-form-html {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
 
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --panel:#0f1722;
-      --text:#e6edf6;
-      --muted:#9aa7b8;
-      --border:#1f2a3a;
-      --shadow:0 18px 60px rgba(0,0,0,.45);
-      --radius:18px;
-      --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Heebo",sans-serif;
-    }
+.hs-form-html label {
+  color: #e5e7eb;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--font);
-      background:radial-gradient(900px 500px at 20% 10%,rgba(167,139,250,.14),transparent 60%),var(--bg);
-      color:var(--text);
-    }
+.hs-form-html input,
+.hs-form-html textarea,
+.hs-form-html select {
+  width: 100%;
+  padding: 12px;
+  background: #020617;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  color: #f9fafb;
+  font-size: 14px;
+}
 
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:26px 18px 64px;
-    }
+.hs-form-html input:focus,
+.hs-form-html textarea:focus,
+.hs-form-html select:focus {
+  outline: none;
+  border-color: #6366f1;
+}
 
-    .card{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg,rgba(15,23,34,.72),rgba(12,18,27,.66));
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:24px;
-    }
+.hs-form-html .hs-button {
+  margin-top: 16px;
+  width: 100%;
+  padding: 14px;
+  background: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-    h1{
-      margin:0 0 18px;
-      font-size:32px;
-    }
+.hs-form-html .hs-button:hover {
+  background: #4f46e5;
+}
 
-    /* ---------- HubSpot form ---------- */
-
-    .hs-form *{
-      font-family:var(--font)!important;
-    }
-
-    .hs-form-field{
-      margin-bottom:14px;
-    }
-
-    .hs-form label{
-      display:block;
-      margin:0 0 6px;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    .hs-form input,
-    .hs-form textarea,
-    .hs-form select{
-      width:100%!important;
-      padding:12px!important;
-      border-radius:14px!important;
-      border:1px solid var(--border)!important;
-      background:rgba(11,15,20,.55)!important;
-      color:var(--text)!important;
-      outline:none!important;
-    }
-
-    .hs-form input:focus,
-    .hs-form textarea:focus{
-      border-color:#9ca3af!important;
-      box-shadow:0 0 0 6px rgba(156,163,175,.15)!important;
-    }
-
-    /* submit button – grey */
-    .hs-form input[type="submit"],
-    .hs-form .hs-button{
-      width:100%!important;
-      padding:12px 14px!important;
-      border-radius:14px!important;
-      background:#6b7280!important;
-      border:1px solid #6b7280!important;
-      color:#111827!important;
-      font-weight:700!important;
-      cursor:pointer!important;
-    }
-
-    .hs-form input[type="submit"]:hover{
-      background:#9ca3af!important;
-      border-color:#9ca3af!important;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="wrap">
-    <h1>בואו נדבר</h1>
-
-    <div class="card">
-      <div id="hubspotForm"></div>
-    </div>
-  </div>
-
-  <!-- HubSpot forms v2 -->
-  <script src="https://js-eu1.hsforms.net/forms/v2.js"></script>
-
-  <script>
-    const LABEL_MAP = {
-      firstname: "שם פרטי",
-      lastname: "שם משפחה",
-      email: "אימייל",
-      phone: "טלפון",
-      company: "חברה",
-      message: "הודעה"
-    };
-
-    function ensureLabels(form){
-      form.querySelectorAll('.hs-form-field').forEach(field=>{
-        const input = field.querySelector('input,textarea,select');
-        if(!input) return;
-
-        let label = field.querySelector('label');
-        if(label) return;
-
-        const name = (input.name||'').toLowerCase();
-        const text = LABEL_MAP[name] || input.placeholder || 'שדה';
-
-        if(!input.id){
-          input.id = 'hs_'+Math.random().toString(16).slice(2);
-        }
-
-        label = document.createElement('label');
-        label.htmlFor = input.id;
-        label.innerText = text;
-        field.prepend(label);
-      });
-    }
-
-    function forceButton(){
-      const btn = document.querySelector('#hubspotForm input[type="submit"]');
-      if(!btn) return false;
-
-      btn.value = 'בואו נדבר!';
-      btn.innerText = 'בואו נדבר!';
-      btn.style.backgroundColor = '#6b7280';
-      btn.style.borderColor = '#6b7280';
-      btn.style.color = '#111827';
-
-      return true;
-    }
-
-    hbspt.forms.create({
-      region:'eu1',
-      portalId:'146828710',
-      formId:'fea75d46-afb0-4038-8af4-9057aff3cb3d',
-      target:'#hubspotForm',
-      css:'',
-      onFormReady:function($form){
-        const form = $form[0];
-        ensureLabels(form);
-        forceButton();
-      }
-    });
-
-    const obs = new MutationObserver(()=>{
-      if(forceButton()) obs.disconnect();
-    });
-    obs.observe(document.body,{childList:true,subtree:true});
-  </script>
-</body>
-</html>
+.hs-form-html .hs-error-msgs label {
+  color: #f87171;
+  font-size: 13px;
+}
+</style>
