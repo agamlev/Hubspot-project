@@ -8,7 +8,9 @@
   <!-- HubSpot tracking -->
   <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
 
+  <!-- Site styles -->
   <link rel="stylesheet" href="styles.css" />
+  <!-- HubSpot form styles -->
   <link rel="stylesheet" href="hubspot-form.css" />
 </head>
 
@@ -27,44 +29,67 @@
         <div id="hs-form-target"></div>
       </div>
 
-      <div class="fineprint">Tracking and analytics handled by HubSpot.</div>
+      <div class="fineprint">
+        Tracking and analytics handled by HubSpot.
+      </div>
     </section>
   </main>
 
-  <footer class="footer">Demo environment · HubSpot forms via v2.js</footer>
+  <footer class="footer">
+    Demo environment · HubSpot forms via v2.js
+  </footer>
 
+  <!-- HubSpot forms v2 -->
   <script src="https://js-eu1.hsforms.net/forms/v2.js" defer></script>
 
   <script>
-    function applyLabelsAndButton(formEl) {
-      function setLabel(inputSelector, text) {
-        const input = formEl.querySelector(inputSelector);
+    function styleForm(formEl) {
+      // Labels (force fixed marketing labels)
+      const map = [
+        { sel: 'input[name="firstname"], input[id*="firstname"]', label: 'Name' },
+        { sel: 'input[name="lastname"], input[id*="lastname"]', label: 'Last name' },
+        { sel: 'input[name="email"], input[type="email"], input[id*="email"]', label: 'Email' },
+      ];
+
+      map.forEach(({ sel, label }) => {
+        const input = formEl.querySelector(sel);
         if (!input) return;
 
         const field = input.closest(".hs-form-field") || input.parentElement;
         if (!field) return;
 
-        let label = field.querySelector(":scope > label");
-        if (!label) {
-          label = document.createElement("label");
-          field.insertBefore(label, field.firstChild);
+        let lbl = field.querySelector(":scope > label");
+        if (!lbl) {
+          lbl = document.createElement("label");
+          field.insertBefore(lbl, field.firstChild);
         }
-        label.textContent = text;
-        if (input.id) label.setAttribute("for", input.id);
-      }
 
-      setLabel('input[name="firstname"], input[id*="firstname"]', "Name");
-      setLabel('input[name="lastname"], input[id*="lastname"]', "Last name");
-      setLabel('input[name="email"], input[type="email"], input[id*="email"]', "Email");
+        lbl.textContent = label;
+        lbl.style.display = "block";
+        lbl.style.margin = "0 0 8px";
+        lbl.style.fontSize = "13px";
+        lbl.style.color = "rgba(229,231,235,0.85)";
+        if (input.id) lbl.setAttribute("for", input.id);
+      });
 
+      // Button: center + gray + new text
       const btn = formEl.querySelector('input[type="submit"], button[type="submit"]');
       if (btn) {
-        const cta = "Let’s talk!";
+        const cta = "Let's talk!";
         if (btn.tagName.toLowerCase() === "input") btn.value = cta;
         else btn.textContent = cta;
 
         const wrap = btn.closest(".hs_submit") || btn.closest(".actions") || btn.parentElement;
-        if (wrap) wrap.classList.add("hs-actions-centered");
+        if (wrap) wrap.classList.add("hs-center-wrap");
+
+        btn.style.height = "44px";
+        btn.style.padding = "0 22px";
+        btn.style.borderRadius = "12px";
+        btn.style.border = "1px solid rgba(255,255,255,0.18)";
+        btn.style.background = "rgba(255,255,255,0.14)";
+        btn.style.color = "#e5e7eb";
+        btn.style.fontWeight = "800";
+        btn.style.cursor = "pointer";
       }
     }
 
@@ -81,21 +106,33 @@
           const formEl =
             (container instanceof HTMLElement && (container.matches("form") ? container : container.querySelector("form"))) ||
             document.querySelector("#hs-form-target form");
+
           if (!formEl) return;
-          applyLabelsAndButton(formEl);
+          styleForm(formEl);
         }
       });
+
+      // Re-apply if HubSpot changes the DOM after initial render
+      const host = document.getElementById("hs-form-target");
+      if (host) {
+        const obs = new MutationObserver(() => {
+          const f = host.querySelector("form");
+          if (f) styleForm(f);
+        });
+        obs.observe(host, { childList: true, subtree: true });
+      }
 
       return true;
     }
 
-    (function boot(){
+    window.addEventListener("load", () => {
+      // Retry loop to handle async script timing on GitHub Pages
       let tries = 0;
       const t = setInterval(() => {
         tries += 1;
-        if (mountHubSpotForm() || tries >= 60) clearInterval(t);
+        if (mountHubSpotForm() || tries >= 80) clearInterval(t);
       }, 100);
-    })();
+    });
   </script>
 </body>
 </html>
