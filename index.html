@@ -2,71 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Convert to lead</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HubSpot Form Embed</title>
 
-  <link rel="stylesheet" href="./styles.css" />
+  <!-- HubSpot tracking -->
+  <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+
   <header class="hero">
-    <h1>Demo Site</h1>
-    <p>HubSpot embedded form inside the styled card</p>
+    <h1>Convert to lead</h1>
+    <p>Fill the form below to create a real HubSpot contact</p>
   </header>
 
   <main class="container">
     <section class="card cta-card">
-      <h2>Convert to lead</h2>
-      <p>Fill the form below to create a real HubSpot contact</p>
 
-      <div class="hs-embed-wrap" id="hs-embed-wrap">
-        <div class="hs-loading" id="hs-loading" aria-hidden="false">
-          <div class="hs-spinner" aria-hidden="true"></div>
-          <div class="hs-loading-text">Loading form...</div>
-        </div>
+      <h2>Get early access</h2>
+      <p>Leave your details and we’ll be in touch shortly</p>
 
-        <script src="https://js-eu1.hsforms.net/forms/embed/146828710.js" defer></script>
-
-        <div
-          class="hs-form-frame"
-          data-region="eu1"
-          data-form-id="d69ef3c9-26f7-4c2f-82a9-96c2f71c53f5"
-          data-portal-id="146828710"
-        ></div>
+      <div class="hs-embed-wrap">
+        <div id="hs-form-target"></div>
       </div>
 
       <div class="fineprint">
-        Tracking and analytics handled by HubSpot embed.
+        Tracking and analytics handled by HubSpot.
       </div>
+
     </section>
   </main>
 
   <footer class="footer">
-    HubSpot Demo Project
+    Demo environment · HubSpot forms via forms/v2.js
   </footer>
 
+  <!-- HubSpot form embed (DOM, not iframe) -->
+  <script src="https://js-eu1.hsforms.net/forms/v2.js"></script>
   <script>
-    // Hides the loading layer once the iframe appears and finishes loading.
-    (function () {
-      const wrap = document.getElementById("hs-embed-wrap");
-      const loading = document.getElementById("hs-loading");
-      if (!wrap || !loading) return;
-
-      const obs = new MutationObserver(() => {
-        const iframe = wrap.querySelector("iframe");
-        if (!iframe) return;
-
-        iframe.addEventListener("load", () => {
-          loading.classList.add("is-hidden");
-          loading.setAttribute("aria-hidden", "true");
-          wrap.classList.add("is-ready");
-        }, { once: true });
-
-        obs.disconnect();
-      });
-
-      obs.observe(wrap, { childList: true, subtree: true });
-    })();
+    hbspt.forms.create({
+      region: "eu1",
+      portalId: "146828710",
+      formId: "d69ef3c9-26f7-4c2f-82a9-96c2f71c53f5",
+      target: "#hs-form-target"
+    });
   </script>
+
 </body>
 </html>
