@@ -1,278 +1,204 @@
-```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Convert to lead</title>
-
-  <!-- HubSpot tracking -->
-  <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
+  <title>agam hubspot test</title>
 
   <style>
     :root{
-      --bg0:#0b0d12;
-      --bg1:#0f1115;
-      --card:rgba(255,255,255,0.06);
-      --card2:rgba(255,255,255,0.03);
-      --border:rgba(255,255,255,0.10);
-      --text:#e5e7eb;
-      --muted:#a3a9b6;
-      --shadow:0 18px 60px rgba(0,0,0,0.45);
-      --radius:18px;
-      --fieldbg:rgba(255,255,255,0.06);
-      --fieldborder:rgba(255,255,255,0.14);
-      --focus:rgba(167,139,250,0.55);
+      --bg: #0b0f14;
+      --panel: #0f1722;
+      --text: #e6edf6;
+      --muted:#9aa7b8;
+      --border:#1f2a3a;
+
+      /* Button tuned to match dark background */
+      --btn-bg: rgba(11,15,20,.75);
+      --btn-bg-hover: rgba(11,15,20,.92);
+      --btn-border: rgba(125,211,252,.55);
+      --btn-border-hover: rgba(125,211,252,.85);
+
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 16px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
+      font-family: var(--font);
       background:
-        radial-gradient(900px 600px at 10% 0%, rgba(124,58,237,0.18), transparent 60%),
-        radial-gradient(700px 520px at 90% 20%, rgba(167,139,250,0.12), transparent 55%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+        radial-gradient(900px 500px at 20% 10%, rgba(167,139,250,.12), transparent 60%),
+        radial-gradient(700px 420px at 80% 15%, rgba(125,211,252,.10), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      place-items: start center;
     }
 
-    .hero{
-      padding:72px 20px 36px;
-      text-align:center;
-      border-bottom:1px solid var(--border);
+    .wrap{
+      width: 100%;
+      max-width: 720px;
+      padding: 48px 18px 64px;
     }
-    .hero h1{ margin:0 0 10px; font-size:44px; }
-    .hero p{ margin:0; color:var(--muted); }
 
-    .container{
-      max-width:980px;
-      margin:0 auto;
-      padding:28px 20px 44px;
+    h1{
+      margin: 0 0 18px;
+      font-size: 28px;
+      letter-spacing: .2px;
+      font-weight: 750;
     }
 
     .card{
-      background:linear-gradient(180deg, var(--card), var(--card2));
       border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+      background: linear-gradient(180deg, rgba(15,23,34,.75), rgba(11,15,20,.55));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
     }
 
-    .cta-card{ padding:22px; }
-    .cta-card h2{ margin:0 0 6px; font-size:22px; }
-    .cta-card > p{ margin:0 0 18px; color:var(--muted); }
+    /* HubSpot form styling */
+    .hs-form *{ font-family: var(--font) !important; }
 
-    .hs-embed-wrap{ margin-top:10px; }
+    .hs-form fieldset{ max-width: 100% !important; }
+    .hs-form .hs-form-field{ margin-bottom: 14px; }
 
-    /* Form surface */
-    .hs-form-html form{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px 18px;
-      padding:26px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.10);
-      background:rgba(0,0,0,0.25);
+    .hs-form label{
+      display:block;
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: var(--muted);
     }
 
-    /* Full width rows (email and submit) */
-    .hs-form-html .hs_email,
-    .hs-form-html .hs_submit{
-      grid-column:1 / -1;
+    .hs-form .hs-input,
+    .hs-form input[type="text"],
+    .hs-form input[type="email"],
+    .hs-form input[type="tel"],
+    .hs-form textarea,
+    .hs-form select{
+      width: 100% !important;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(11,15,20,.55);
+      color: var(--text);
+      outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease;
     }
 
-    /* Labels */
-    .hs-form-html .hs-form-field > label{
-      display:block !important;
-      margin:0 0 8px !important;
-      font-size:13px;
-      color:rgba(229,231,235,0.85);
+    .hs-form textarea{ min-height: 110px; resize: vertical; }
+
+    .hs-form .hs-input:focus,
+    .hs-form input:focus,
+    .hs-form textarea:focus,
+    .hs-form select:focus{
+      border-color: rgba(125,211,252,.55);
+      box-shadow: 0 0 0 6px rgba(125,211,252,.10);
     }
 
-    /* Inputs */
-    .hs-form-html .hs-input,
-    .hs-form-html input[type="text"],
-    .hs-form-html input[type="email"],
-    .hs-form-html input[type="tel"],
-    .hs-form-html select,
-    .hs-form-html textarea{
-      width:100% !important;
-      height:44px;
-      padding:10px 12px;
-      border-radius:10px;
-      border:1px solid var(--fieldborder);
-      background:var(--fieldbg);
-      color:var(--text);
-      outline:none;
+    /* Button updated to match background */
+    .hs-form .hs-button{
+      width: 100% !important;
+      padding: 12px 14px !important;
+      border-radius: 14px !important;
+      border: 1px solid var(--btn-border) !important;
+      background: var(--btn-bg) !important;
+      color: var(--text) !important;
+      font-weight: 700 !important;
+      letter-spacing: .2px !important;
+      cursor: pointer !important;
+      transition: box-shadow .15s ease, border-color .15s ease, background .15s ease, transform .05s ease;
+    }
+    .hs-form .hs-button:hover{
+      border-color: var(--btn-border-hover) !important;
+      background: var(--btn-bg-hover) !important;
+      box-shadow: 0 0 0 7px rgba(125,211,252,.10);
+    }
+    .hs-form .hs-button:active{ transform: translateY(1px); }
+
+    .hs-form .hs-error-msgs{ margin: 8px 0 0; padding: 0; list-style: none; }
+    .hs-form .hs-error-msgs label{
+      color: #fb7185;
+      font-size: 12px;
+      margin: 6px 0 0;
     }
 
-    .hs-form-html input:focus,
-    .hs-form-html select:focus,
-    .hs-form-html textarea:focus{
-      border-color:var(--focus);
-      box-shadow:0 0 0 4px rgba(167,139,250,0.18);
+    .hs-form .legal-consent-container,
+    .hs-form .hs-richtext{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
     }
-
-    /* Center submit wrapper */
-    .hs-center-wrap{
-      display:flex !important;
-      justify-content:center !important;
-      width:100%;
-      margin-top:12px;
-    }
-
-    /* Gray button */
-    .hs-form-html input[type="submit"],
-    .hs-form-html button[type="submit"],
-    .hs-form-html .hs-button{
-      height:44px;
-      padding:0 22px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.18) !important;
-      background:rgba(255,255,255,0.14) !important;
-      color:var(--text) !important;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .hs-form-html input[type="submit"]:hover,
-    .hs-form-html button[type="submit"]:hover,
-    .hs-form-html .hs-button:hover{
-      background:rgba(255,255,255,0.18) !important;
-    }
-
-    .fineprint{
-      margin-top:14px;
-      font-size:12px;
-      color:rgba(229,231,235,0.65);
-    }
-
-    .footer{
-      padding:18px 20px 26px;
-      text-align:center;
-      color:rgba(229,231,235,0.55);
-      font-size:12px;
-    }
-
-    @media (max-width:640px){
-      .hs-form-html form{
-        grid-template-columns:1fr;
-        padding:18px;
-      }
-      .hs-form-html .hs_email,
-      .hs-form-html .hs_submit{
-        grid-column:auto;
-      }
-    }
+    .hs-form .legal-consent-container a{ color: rgba(125,211,252,.95); }
   </style>
 </head>
 
 <body>
-  <header class="hero">
-    <h1>Convert to lead</h1>
-    <p>Fill the form below to create a real HubSpot contact</p>
-  </header>
+  <div class="wrap">
+    <h1>agam hubspot test</h1>
 
-  <main class="container">
-    <section class="card cta-card">
-      <h2>Get early access</h2>
-      <p>Leave your details and we’ll be in touch shortly</p>
+    <div class="card">
+      <div id="hubspotForm"></div>
+    </div>
+  </div>
 
-      <!-- HubSpot Developer Embed Target -->
-      <div class="hs-embed-wrap">
-        <div class="hs-form-html"
-             data-region="eu1"
-             data-form-id="fea75d46-afb0-4038-8af4-9057aff3cb3d"
-             data-portal-id="146828710"></div>
-      </div>
-
-      <div class="fineprint">
-        Tracking and analytics handled by HubSpot.
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    Demo environment · HubSpot developer embed
-  </footer>
-
-  <!-- HubSpot Developer Embed Script -->
-  <script src="https://js-eu1.hsforms.net/forms/embed/developer/146828710.js" defer></script>
+  <!-- HubSpot Forms v2 -->
+  <script charset="utf-8" type="text/javascript" src="https://js-eu1.hsforms.net/forms/v2.js"></script>
 
   <script>
-    function applyMarketingOverrides(root) {
-      const form = root.querySelector("form");
-      if (!form) return false;
+    // Optional: force labels if the form doesn't render them (fallback)
+    const LABEL_MAP = {
+      firstname: "First name",
+      lastname: "Last name",
+      email: "Email",
+      phone: "Phone",
+      company: "Company",
+      message: "Message"
+    };
 
-      // Custom labels (by field order to avoid HS config differences)
-      const inputs = Array.from(
-        form.querySelectorAll('input.hs-input, input[type="text"], input[type="email"]')
-      ).filter(i => i.type !== "hidden");
+    function ensureLabels(formEl){
+      const fields = formEl.querySelectorAll(".hs-form-field");
+      fields.forEach(field => {
+        const input = field.querySelector("input, textarea, select");
+        if(!input) return;
 
-      const labels = [
-        { text: "First name", help: "Your given name" },
-        { text: "Last name", help: "Your family name" },
-        { text: "Email", help: "We’ll use this to contact you" }
-      ];
+        let label = field.querySelector("label");
+        if(label && label.textContent.trim().length > 0) return;
 
-      labels.forEach((cfg, idx) => {
-        const input = inputs[idx];
-        if (!input) return;
+        const name = (input.getAttribute("name") || "").toLowerCase();
+        const placeholder = (input.getAttribute("placeholder") || "").trim();
+        const text = LABEL_MAP[name] || placeholder || "Field";
 
-        const field = input.closest(".hs-form-field") || input.parentElement;
-        if (!field) return;
-
-        let lbl = field.querySelector(":scope > label");
-        if (!lbl) {
-          lbl = document.createElement("label");
-          field.insertBefore(lbl, field.firstChild);
+        if(!input.id){
+          input.id = "hs_" + Math.random().toString(16).slice(2);
         }
 
-        lbl.textContent = cfg.text;
+        label = document.createElement("label");
+        label.setAttribute("for", input.id);
+        label.textContent = text;
 
-        // Add a small helper line under the label (marketing explanation)
-        let helper = field.querySelector(":scope > .field-help");
-        if (!helper) {
-          helper = document.createElement("div");
-          helper.className = "field-help";
-          field.insertBefore(helper, input);
+        field.insertBefore(label, field.firstChild);
+
+        if(!placeholder){
+          input.setAttribute("placeholder", text);
         }
-        helper.textContent = cfg.help;
-        helper.style.setProperty("margin", "-4px 0 10px", "important");
-        helper.style.setProperty("font-size", "12px", "important");
-        helper.style.setProperty("color", "rgba(229,231,235,0.55)", "important");
       });
-
-      // Button overrides
-      const btn = form.querySelector('input[type="submit"], button[type="submit"]');
-      if (btn) {
-        const cta = "Let's talk!";
-        if (btn.tagName.toLowerCase() === "input") btn.value = cta;
-        else btn.textContent = cta;
-
-        const wrap = btn.closest(".hs_submit") || btn.closest(".actions") || btn.parentElement;
-        if (wrap) wrap.classList.add("hs-center-wrap");
-      }
-
-      return true;
     }
 
-    window.addEventListener("load", () => {
-      const root = document.querySelector(".hs-form-html");
-      if (!root) return;
+    hbspt.forms.create({
+      region: "eu1",
+      portalId: "146828710",
+      formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
+      target: "#hubspotForm",
+      css: "",
 
-      // Retry until HubSpot injects the form
-      let tries = 0;
-      const t = setInterval(() => {
-        tries += 1;
-        if (applyMarketingOverrides(root) || tries >= 160) clearInterval(t);
-      }, 100);
-
-      // Re-apply if HubSpot rerenders
-      const obs = new MutationObserver(() => applyMarketingOverrides(root));
-      obs.observe(root, { childList: true, subtree: true });
+      onFormReady: function($form){
+        const formEl = $form && $form[0] ? $form[0] : document.querySelector("#hubspotForm form");
+        if(formEl) ensureLabels(formEl);
+      }
     });
   </script>
 </body>
 </html>
-```
