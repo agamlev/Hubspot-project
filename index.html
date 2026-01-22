@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Demo Website</title>
+  <title>HubSpot Demo Website</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- HubSpot Tracking -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/146828710.js"></script>
 
   <style>
     body {
@@ -69,19 +72,55 @@
       font-size: 26px;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 18px;
-      background: #3b82f6;
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 18px;
+    .cta-card p {
+      margin-bottom: 30px;
+    }
+
+    .custom-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .custom-form input {
+      background: #0f1115;
+      border: 1px solid #2b303b;
+      color: #e5e7eb;
+      padding: 14px;
       border-radius: 8px;
       font-size: 15px;
     }
 
-    .btn:hover {
+    .custom-form input::placeholder {
+      color: #6b7280;
+    }
+
+    .custom-form button {
+      background: #3b82f6;
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .custom-form button:hover {
       background: #2563eb;
+    }
+
+    #form-success {
+      margin-top: 20px;
+      color: #22c55e;
+      display: none;
+    }
+
+    #form-error {
+      margin-top: 20px;
+      color: #ef4444;
+      display: none;
     }
 
     footer {
@@ -98,7 +137,7 @@
 
 <header>
   <h1>Demo Site</h1>
-  <p>Main page without HubSpot code</p>
+  <p>Main page with HubSpot form inside</p>
 </header>
 
 <main>
@@ -106,21 +145,38 @@
   <div class="card">
     <h2>About this site</h2>
     <p>
-      This is the main page. HubSpot tracking and forms are separated into a different page.
+      This is a demo environment for testing HubSpot tracking and a custom form submission,
+      without touching production.
     </p>
   </div>
 
   <div class="card cta-card">
-    <h2>HubSpot page</h2>
-    <p>Go to the dedicated page for HubSpot tracking and forms</p>
-    <a class="btn" href="./hebspot_forms.html">Open HubSpot Forms</a>
+    <h2>Convert to lead</h2>
+    <p>Fill the form below to create a real HubSpot contact</p>
+
+    <form id="lead-form" class="custom-form">
+      <input type="text" name="firstname" placeholder="First name" required>
+      <input type="email" name="email" placeholder="Email address" required>
+      <button type="submit" id="lead-submit">Submit</button>
+    </form>
+
+    <div id="form-success">
+      Thanks. Lead created successfully.
+    </div>
+
+    <div id="form-error">
+      Something went wrong. Please try again.
+    </div>
   </div>
 
 </main>
 
 <footer>
-  Demo Project · GitHub Pages
+  HubSpot Demo Project · GitHub Pages · Dark developer mode
 </footer>
+
+<!-- Only the logic lives here -->
+<script src="./hubspot_lead.js"></script>
 
 </body>
 </html>
