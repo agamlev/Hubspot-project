@@ -9,66 +9,86 @@
     body {
       margin: 0;
       padding: 40px 16px;
-      background: #0f172a;
+      background: radial-gradient(circle at top, #0b1b33, #020617);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
     .hs-form-html {
-      max-width: 520px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 32px;
-      background: #111827;
-      border: 1px solid #1f2937;
-      border-radius: 12px;
+      padding: 48px;
+      background: linear-gradient(180deg, #020617, #020617);
+      border: 1px solid #1e293b;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
     }
 
-    .hs-form-html label {
-      color: #e5e7eb;
-      font-size: 14px;
+    /* layout */
+    .hs-form fieldset {
+      max-width: 100%;
+    }
+
+    .hs-form .hs-form-field {
+      margin-bottom: 20px;
+    }
+
+    /* labels */
+    .hs-form label {
+      color: #cbd5f5;
+      font-size: 13px;
+      font-weight: 500;
       margin-bottom: 6px;
       display: block;
     }
 
-    .hs-form-html input,
-    .hs-form-html textarea,
-    .hs-form-html select {
+    /* inputs */
+    .hs-form input,
+    .hs-form textarea,
+    .hs-form select {
       width: 100%;
-      padding: 12px;
-      background: #020617;
-      border: 1px solid #374151;
-      border-radius: 8px;
-      color: #f9fafb;
-      font-size: 14px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #0f172a;
       box-sizing: border-box;
     }
 
-    .hs-form-html input:focus,
-    .hs-form-html textarea:focus,
-    .hs-form-html select:focus {
+    .hs-form input:focus,
+    .hs-form textarea:focus,
+    .hs-form select:focus {
       outline: none;
       border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
     }
 
-    .hs-form-html .hs-button {
-      margin-top: 16px;
-      width: 100%;
-      padding: 14px;
-      background: #6366f1;
+    /* button */
+    .hs-form .hs-button {
+      margin-top: 28px;
+      padding: 16px 36px;
+      background: linear-gradient(135deg, #ff7a59, #ff946d);
       color: #ffffff;
       border: none;
-      border-radius: 10px;
-      font-size: 15px;
+      border-radius: 999px;
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
+      float: right;
+      box-shadow: 0 10px 25px rgba(255,122,89,0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .hs-form-html .hs-button:hover {
-      background: #4f46e5;
+    .hs-form .hs-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 35px rgba(255,122,89,0.45);
     }
 
-    .hs-form-html .hs-error-msgs label {
+    /* errors */
+    .hs-error-msgs label {
       color: #f87171;
-      font-size: 13px;
+      font-size: 12px;
+      margin-top: 4px;
     }
   </style>
 </head>
