@@ -1,124 +1,35 @@
-/* Wrapper */
-.hs-embed-wrap{
-  margin-top: 10px;
-}
-
-/* Form container */
-#hs-form-target form{
-  padding: 26px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(0,0,0,0.25);
-}
-
-/* Grid layout */
-#hs-form-target form{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 18px;
-}
-
-/* Full-width common fields */
-#hs-form-target .hs_email,
-#hs-form-target .hs_phone,
-#hs-form-target .hs_company,
-#hs-form-target .hs_message,
-#hs-form-target .hs_submit{
-  grid-column: 1 / -1;
-}
-
 /* Labels */
 #hs-form-target .hs-form-field > label{
   display: block !important;
   margin: 0 0 8px !important;
   font-size: 13px;
-  color: rgba(229,231,235,0.80);
+  color: rgba(229,231,235,0.85);
 }
 
-/* Field spacing */
-#hs-form-target .hs-form-field{
-  margin: 0;
-}
-
-/* Inputs */
-#hs-form-target input[type="text"],
-#hs-form-target input[type="email"],
-#hs-form-target input[type="tel"],
-#hs-form-target input[type="number"],
-#hs-form-target select,
-#hs-form-target textarea,
-#hs-form-target .hs-input{
-  width: 100% !important;
-  height: 44px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
-  color: #e5e7eb;
-  outline: none;
-}
-
-#hs-form-target textarea,
-#hs-form-target textarea.hs-input{
-  height: auto;
-  min-height: 110px;
-  resize: vertical;
-}
-
-#hs-form-target input:focus,
-#hs-form-target select:focus,
-#hs-form-target textarea:focus{
-  border-color: rgba(167,139,250,0.55);
-  box-shadow: 0 0 0 4px rgba(167,139,250,0.18);
-}
-
-/* Center submit */
+/* Center submit wrapper */
 #hs-form-target .hs-actions-centered{
+  grid-column: 1 / -1;
   display: flex !important;
   justify-content: center !important;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
-/* Button */
+/* Gray button + centered */
 #hs-form-target input[type="submit"],
 #hs-form-target button[type="submit"],
 #hs-form-target .hs-button{
   height: 44px;
   padding: 0 22px;
   border-radius: 12px;
-  border: 0 !important;
-  background: #ff7a59 !important;
-  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.14) !important;
+  background: rgba(255,255,255,0.14) !important;
+  color: #e5e7eb !important;
   font-weight: 800;
-  letter-spacing: 0.2px;
   cursor: pointer;
 }
 
 #hs-form-target input[type="submit"]:hover,
 #hs-form-target button[type="submit"]:hover,
 #hs-form-target .hs-button:hover{
-  filter: brightness(1.05);
-}
-
-/* Errors */
-#hs-form-target .hs-error-msg,
-#hs-form-target .hs-error-msgs label{
-  color: #ffb4b4 !important;
-  font-size: 12px;
-}
-
-/* Mobile */
-@media (max-width: 640px){
-  #hs-form-target form{
-    grid-template-columns: 1fr;
-    padding: 18px;
-  }
-
-  #hs-form-target .hs_email,
-  #hs-form-target .hs_phone,
-  #hs-form-target .hs_company,
-  #hs-form-target .hs_message,
-  #hs-form-target .hs_submit{
-    grid-column: auto;
-  }
+  background: rgba(255,255,255,0.18) !important;
 }
