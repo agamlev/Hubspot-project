@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HubSpot Demo Website</title>
+  <title>Demo Website</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- HubSpot Tracking -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/146828710.js"></script>
 
   <style>
     body {
@@ -72,50 +69,19 @@
       font-size: 26px;
     }
 
-    .cta-card p {
-      margin-bottom: 30px;
-    }
-
-    /* Custom form */
-    .custom-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .custom-form input {
-      background: #0f1115;
-      border: 1px solid #2b303b;
-      color: #e5e7eb;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    .custom-form input::placeholder {
-      color: #6b7280;
-    }
-
-    .custom-form button {
+    .btn {
+      display: inline-block;
+      margin-top: 18px;
       background: #3b82f6;
-      border: none;
-      color: white;
-      padding: 14px;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 18px;
       border-radius: 8px;
       font-size: 15px;
-      cursor: pointer;
     }
 
-    .custom-form button:hover {
+    .btn:hover {
       background: #2563eb;
-    }
-
-    #form-success {
-      margin-top: 20px;
-      color: #22c55e;
-      display: none;
     }
 
     footer {
@@ -131,8 +97,8 @@
 <body>
 
 <header>
-  <h1>HubSpot Demo Site</h1>
-  <p>Dark sandbox for testing tracking, forms, and automations</p>
+  <h1>Demo Site</h1>
+  <p>Main page without HubSpot code</p>
 </header>
 
 <main>
@@ -140,70 +106,21 @@
   <div class="card">
     <h2>About this site</h2>
     <p>
-      This is an isolated demo environment for testing HubSpot tracking,
-      cookies, lead creation, and automation flows without touching production.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>What you can test</h2>
-    <p>
-      Anonymous page views, HubSpot cookies, custom form submissions,
-      lifecycle stages, workflows, and attribution logic.
+      This is the main page. HubSpot tracking and forms are separated into a different page.
     </p>
   </div>
 
   <div class="card cta-card">
-    <h2>Convert to lead</h2>
-    <p>Fill the form below to create a real HubSpot contact</p>
-
-    <form id="lead-form" class="custom-form">
-      <input type="text" name="firstname" placeholder="First name" required>
-      <input type="email" name="email" placeholder="Email address" required>
-      <button type="submit">Submit</button>
-    </form>
-
-    <div id="form-success">
-      Thanks. Lead created successfully.
-    </div>
+    <h2>HubSpot page</h2>
+    <p>Go to the dedicated page for HubSpot tracking and forms</p>
+    <a class="btn" href="./hebspot_forms.html">Open HubSpot Forms</a>
   </div>
 
 </main>
 
 <footer>
-  HubSpot Demo Project · GitHub Pages · Dark developer mode
+  Demo Project · GitHub Pages
 </footer>
-
-<script>
-document.getElementById("lead-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const payload = {
-    fields: [
-      { name: "firstname", value: e.target.firstname.value },
-      { name: "email", value: e.target.email.value }
-    ],
-    context: {
-      pageUri: window.location.href,
-      pageName: document.title
-    }
-  };
-
-  fetch(
-    "https://api.hsforms.com/submissions/v3/integration/submit/146828710/add43d94-a32e-427c-888e-53be9f6c42ae",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    }
-  ).then(res => {
-    if (res.ok) {
-      document.getElementById("lead-form").style.display = "none";
-      document.getElementById("form-success").style.display = "block";
-    }
-  });
-});
-</script>
 
 </body>
 </html>
