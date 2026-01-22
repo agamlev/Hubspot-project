@@ -1,38 +1,48 @@
-/* Wrapper שמחזיק את הטופס */
+/* Wrapper */
 .hs-embed-wrap{
   margin-top: 10px;
-  padding: 14px;
-  border-radius: calc(var(--radius) - 6px);
+}
+
+/* Form container */
+#hs-form-target .hs-form{
+  padding: 26px;
+  border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(15,17,21,0.55);
+  background: rgba(0,0,0,0.25);
 }
 
-/* שורת טעינה עד שה iframe מגיע */
-.hs-form-frame:empty{
-  min-height: 320px;
-  position: relative;
-}
-.hs-form-frame:empty::after{
-  content: "Loading form...";
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: rgba(229,231,235,0.65);
+/* Turn on labels (in case HS added classes that hide them) */
+#hs-form-target .hs-form label{
+  display: block !important;
+  margin: 0 0 8px !important;
   font-size: 13px;
+  color: rgba(229,231,235,0.80);
 }
 
-/* iframe עצמו */
-.hs-form-frame iframe{
+/* Field blocks */
+#hs-form-target .hs-form-field{
+  margin: 0 0 16px;
+}
+
+/* Inputs */
+#hs-form-target .hs-input{
   width: 100% !important;
-  max-width: 100% !important;
-  border: 0 !important;
-  border-radius: 12px;
-  background: transparent;
+  height: 44px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: #e5e7eb;
+  outline: none;
 }
 
-/* רספונסיביות */
-@media (max-width: 520px){
-  .cta-card{ padding: 16px; }
-  .hs-embed-wrap{ padding: 12px; }
+#hs-form-target .hs-input::placeholder{
+  color: rgba(229,231,235,0.40);
 }
+
+#hs-form-target .hs-input:focus{
+  border-color: rgba(167,139,250,0.55);
+  box-shadow: 0 0 0 4px rgba(167,139,250,0.18);
+}
+
+/* Lay*
