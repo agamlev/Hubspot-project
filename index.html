@@ -10,7 +10,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="styles.css" />
-  <!-- HubSpot embed wrapper styles -->
+  <!-- HubSpot form styles -->
   <link rel="stylesheet" href="hubspot-form.css" />
 </head>
 
@@ -27,13 +27,7 @@
       <p>Leave your details and we’ll be in touch shortly</p>
 
       <div class="hs-embed-wrap">
-        <script src="https://js-eu1.hsforms.net/forms/embed/146828710.js" defer></script>
-        <div
-          class="hs-form-frame"
-          data-region="eu1"
-          data-form-id="fea75d46-afb0-4038-8af4-9057aff3cb3d"
-          data-portal-id="146828710">
-        </div>
+        <div id="hs-form-target"></div>
       </div>
 
       <div class="fineprint">
@@ -43,8 +37,35 @@
   </main>
 
   <footer class="footer">
-    Demo environment · HubSpot forms via embed
+    Demo environment · HubSpot forms via v2.js (DOM)
   </footer>
+
+  <!-- HubSpot form embed (DOM) -->
+  <script src="https://js-eu1.hsforms.net/forms/v2.js" defer></script>
+  <script>
+    window.addEventListener("load", () => {
+      if (!window.hbspt || !window.hbspt.forms || !window.hbspt.forms.create) return;
+
+      window.hbspt.forms.create({
+        region: "eu1",
+        portalId: "146828710",
+        formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
+        target: "#hs-form-target",
+        css: "",
+
+        onFormReady: function($form){
+          const formEl = ($form instanceof HTMLElement) ? $form : document.querySelector("#hs-form-target form");
+          if (!formEl) return;
+
+          const submit = formEl.querySelector('input[type="submit"]');
+          if (submit) submit.value = "Let’s talk!";
+
+          // Ensure labels are visible (HubSpot sometimes allows hiding labels via settings)
+          formEl.classList.add("hs-labels-on");
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
