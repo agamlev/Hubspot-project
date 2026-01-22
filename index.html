@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +9,162 @@
   <!-- HubSpot tracking -->
   <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
 
-  <!-- Site styles -->
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Form styles -->
-  <link rel="stylesheet" href="hubspot-form.css" />
+  <style>
+    :root{
+      --bg0:#0b0d12;
+      --bg1:#0f1115;
+      --card:rgba(255,255,255,0.06);
+      --card2:rgba(255,255,255,0.03);
+      --border:rgba(255,255,255,0.10);
+      --text:#e5e7eb;
+      --muted:#a3a9b6;
+      --shadow:0 18px 60px rgba(0,0,0,0.45);
+      --radius:18px;
+      --fieldbg:rgba(255,255,255,0.06);
+      --fieldborder:rgba(255,255,255,0.14);
+      --focus:rgba(167,139,250,0.55);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 10% 0%, rgba(124,58,237,0.18), transparent 60%),
+        radial-gradient(700px 520px at 90% 20%, rgba(167,139,250,0.12), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+
+    .hero{
+      padding:72px 20px 36px;
+      text-align:center;
+      border-bottom:1px solid var(--border);
+    }
+    .hero h1{ margin:0 0 10px; font-size:44px; }
+    .hero p{ margin:0; color:var(--muted); }
+
+    .container{
+      max-width:980px;
+      margin:0 auto;
+      padding:28px 20px 44px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, var(--card), var(--card2));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .cta-card{ padding:22px; }
+    .cta-card h2{ margin:0 0 6px; font-size:22px; }
+    .cta-card > p{ margin:0 0 18px; color:var(--muted); }
+
+    .hs-embed-wrap{ margin-top:10px; }
+
+    /* Form surface */
+    .hs-form-html form{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px 18px;
+      padding:26px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(0,0,0,0.25);
+    }
+
+    /* Full width rows (email and submit) */
+    .hs-form-html .hs_email,
+    .hs-form-html .hs_submit{
+      grid-column:1 / -1;
+    }
+
+    /* Labels */
+    .hs-form-html .hs-form-field > label{
+      display:block !important;
+      margin:0 0 8px !important;
+      font-size:13px;
+      color:rgba(229,231,235,0.85);
+    }
+
+    /* Inputs */
+    .hs-form-html .hs-input,
+    .hs-form-html input[type="text"],
+    .hs-form-html input[type="email"],
+    .hs-form-html input[type="tel"],
+    .hs-form-html select,
+    .hs-form-html textarea{
+      width:100% !important;
+      height:44px;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid var(--fieldborder);
+      background:var(--fieldbg);
+      color:var(--text);
+      outline:none;
+    }
+
+    .hs-form-html input:focus,
+    .hs-form-html select:focus,
+    .hs-form-html textarea:focus{
+      border-color:var(--focus);
+      box-shadow:0 0 0 4px rgba(167,139,250,0.18);
+    }
+
+    /* Center submit wrapper */
+    .hs-center-wrap{
+      display:flex !important;
+      justify-content:center !important;
+      width:100%;
+      margin-top:12px;
+    }
+
+    /* Gray button */
+    .hs-form-html input[type="submit"],
+    .hs-form-html button[type="submit"],
+    .hs-form-html .hs-button{
+      height:44px;
+      padding:0 22px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.18) !important;
+      background:rgba(255,255,255,0.14) !important;
+      color:var(--text) !important;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .hs-form-html input[type="submit"]:hover,
+    .hs-form-html button[type="submit"]:hover,
+    .hs-form-html .hs-button:hover{
+      background:rgba(255,255,255,0.18) !important;
+    }
+
+    .fineprint{
+      margin-top:14px;
+      font-size:12px;
+      color:rgba(229,231,235,0.65);
+    }
+
+    .footer{
+      padding:18px 20px 26px;
+      text-align:center;
+      color:rgba(229,231,235,0.55);
+      font-size:12px;
+    }
+
+    @media (max-width:640px){
+      .hs-form-html form{
+        grid-template-columns:1fr;
+        padding:18px;
+      }
+      .hs-form-html .hs_email,
+      .hs-form-html .hs_submit{
+        grid-column:auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -43,23 +196,26 @@
     Demo environment · HubSpot developer embed
   </footer>
 
-  <!-- HubSpot Developer Embed Script (must be after the target div) -->
+  <!-- HubSpot Developer Embed Script -->
   <script src="https://js-eu1.hsforms.net/forms/embed/developer/146828710.js" defer></script>
 
   <script>
-    // This embed renders asynchronously. We wait for the form DOM, then override labels + CTA.
     function applyMarketingOverrides(root) {
       const form = root.querySelector("form");
       if (!form) return false;
 
-      // 1) Force labels by input order (more reliable than name matching across HS configs)
+      // Custom labels (by field order to avoid HS config differences)
       const inputs = Array.from(
-        form.querySelectorAll('input.hs-input, input[type="text"], input[type="email"], input[type="tel"]')
+        form.querySelectorAll('input.hs-input, input[type="text"], input[type="email"]')
       ).filter(i => i.type !== "hidden");
 
-      const wanted = ["Name", "Last name", "Email"];
+      const labels = [
+        { text: "First name", help: "Your given name" },
+        { text: "Last name", help: "Your family name" },
+        { text: "Email", help: "We’ll use this to contact you" }
+      ];
 
-      wanted.forEach((txt, idx) => {
+      labels.forEach((cfg, idx) => {
         const input = inputs[idx];
         if (!input) return;
 
@@ -72,37 +228,30 @@
           field.insertBefore(lbl, field.firstChild);
         }
 
-        lbl.textContent = txt;
-        lbl.style.setProperty("display", "block", "important");
-        lbl.style.setProperty("margin", "0 0 8px", "important");
-        lbl.style.setProperty("font-size", "13px", "important");
-        lbl.style.setProperty("color", "rgba(229,231,235,0.85)", "important");
-        if (input.id) lbl.setAttribute("for", input.id);
+        lbl.textContent = cfg.text;
+
+        // Add a small helper line under the label (marketing explanation)
+        let helper = field.querySelector(":scope > .field-help");
+        if (!helper) {
+          helper = document.createElement("div");
+          helper.className = "field-help";
+          field.insertBefore(helper, input);
+        }
+        helper.textContent = cfg.help;
+        helper.style.setProperty("margin", "-4px 0 10px", "important");
+        helper.style.setProperty("font-size", "12px", "important");
+        helper.style.setProperty("color", "rgba(229,231,235,0.55)", "important");
       });
 
-      // 2) Button: center + gray + new text
+      // Button overrides
       const btn = form.querySelector('input[type="submit"], button[type="submit"]');
       if (btn) {
-        const cta = "Let’s talk!";
+        const cta = "Let's talk!";
         if (btn.tagName.toLowerCase() === "input") btn.value = cta;
         else btn.textContent = cta;
 
         const wrap = btn.closest(".hs_submit") || btn.closest(".actions") || btn.parentElement;
-        if (wrap) {
-          wrap.style.setProperty("display", "flex", "important");
-          wrap.style.setProperty("justify-content", "center", "important");
-          wrap.style.setProperty("width", "100%", "important");
-          wrap.style.setProperty("margin-top", "12px", "important");
-        }
-
-        btn.style.setProperty("height", "44px", "important");
-        btn.style.setProperty("padding", "0 22px", "important");
-        btn.style.setProperty("border-radius", "12px", "important");
-        btn.style.setProperty("border", "1px solid rgba(255,255,255,0.18)", "important");
-        btn.style.setProperty("background", "rgba(255,255,255,0.14)", "important");
-        btn.style.setProperty("color", "#e5e7eb", "important");
-        btn.style.setProperty("font-weight", "800", "important");
-        btn.style.setProperty("cursor", "pointer", "important");
+        if (wrap) wrap.classList.add("hs-center-wrap");
       }
 
       return true;
@@ -112,16 +261,18 @@
       const root = document.querySelector(".hs-form-html");
       if (!root) return;
 
-      // Retry a bit, then keep watching for DOM changes (HubSpot can rerender)
+      // Retry until HubSpot injects the form
       let tries = 0;
       const t = setInterval(() => {
         tries += 1;
-        if (applyMarketingOverrides(root) || tries >= 120) clearInterval(t);
+        if (applyMarketingOverrides(root) || tries >= 160) clearInterval(t);
       }, 100);
 
+      // Re-apply if HubSpot rerenders
       const obs = new MutationObserver(() => applyMarketingOverrides(root));
       obs.observe(root, { childList: true, subtree: true });
     });
   </script>
 </body>
 </html>
+```
