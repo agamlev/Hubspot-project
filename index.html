@@ -1,122 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Convert to lead</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<script>
+  function applyCustomLabelsAndCTA(formEl) {
+    const setLabel = (selector, text) => {
+      const input = formEl.querySelector(selector);
+      if (!input) return;
 
-  <!-- HubSpot tracking -->
-  <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
+      const field =
+        input.closest(".hs-form-field") ||
+        input.closest(".field") ||
+        input.parentElement;
 
-  <!-- Site styles -->
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Form styles -->
-  <link rel="stylesheet" href="hubspot-form.css" />
-</head>
+      if (!field) return;
 
-<body>
-  <header class="hero">
-    <h1>Convert to lead</h1>
-    <p>Fill the form below to create a real HubSpot contact</p>
-  </header>
+      const existing = field.querySelector(":scope > label");
+      if (existing && existing.textContent.trim()) {
+        existing.textContent = text;
+        return;
+      }
 
-  <main class="container">
-    <section class="card cta-card">
-      <h2>Get early access</h2>
-      <p>Leave your details and we’ll be in touch shortly</p>
+      const lbl = document.createElement("label");
+      lbl.textContent = text;
+      if (input.id) lbl.setAttribute("for", input.id);
+      field.insertBefore(lbl, field.firstChild);
+    };
 
-      <div class="hs-embed-wrap">
-        <div id="hs-form-target"></div>
-      </div>
+    // Labels
+    setLabel('input[name="firstname"], input[name="first_name"], input[id*="firstname"]', "Name");
+    setLabel('input[name="lastname"], input[name="last_name"], input[id*="lastname"]', "Last name");
+    setLabel('input[name="email"], input[type="email"], input[id*="email"]', "Email");
 
-      <div class="fineprint">
-        Tracking and analytics handled by HubSpot.
-      </div>
-    </section>
-  </main>
+    // Button text + center hook
+    const btn = formEl.querySelector('input[type="submit"], button[type="submit"]');
+    if (btn) {
+      const cta = "Let’s talk!";
+      if (btn.tagName.toLowerCase() === "input") btn.value = cta;
+      else btn.textContent = cta;
 
-  <footer class="footer">
-    Demo environment · HubSpot forms via v2.js
-  </footer>
+      const wrap =
+        btn.closest(".hs_submit") ||
+        btn.closest(".actions") ||
+        btn.parentElement;
 
-  <!-- HubSpot forms v2 -->
-  <script src="https://js-eu1.hsforms.net/forms/v2.js" defer></script>
-
-  <script>
-    function setSubmitText(formEl) {
-      const btn = formEl.querySelector('input[type="submit"], button[type="submit"]');
-      if (!btn) return;
-
-      const txt = "Let’s talk!";
-      if (btn.tagName.toLowerCase() === "input") btn.value = txt;
-      else btn.textContent = txt;
+      if (wrap) wrap.classList.add("hs-actions-centered");
     }
+  }
 
-    function centerSubmit(formEl) {
-      const submitWrap =
-        formEl.querySelector(".hs_submit") ||
-        formEl.querySelector(".actions") ||
-        (formEl.querySelector('input[type="submit"], button[type="submit"]')?.parentElement);
+  window.addEventListener("load", () => {
+    if (!window.hbspt?.forms?.create) return;
 
-      if (submitWrap) submitWrap.classList.add("hs-actions-centered");
-    }
+    window.hbspt.forms.create({
+      region: "eu1",
+      portalId: "146828710",
+      formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
+      target: "#hs-form-target",
+      css: "",
+      onFormReady: function(container) {
+        const formEl =
+          (container instanceof HTMLElement && (container.matches("form") ? container : container.querySelector("form"))) ||
+          document.querySelector("#hs-form-target form");
 
-    function ensureLabels(formEl) {
-      const fields = formEl.querySelectorAll(".hs-form-field");
-      fields.forEach(field => {
-        const input = field.querySelector("input, select, textarea");
-        if (!input) return;
-
-        const existing = field.querySelector(":scope > label");
-        const hasLabel = existing && existing.textContent && existing.textContent.trim().length > 0;
-        if (hasLabel) return;
-
-        const name = (input.name || "").toLowerCase();
-        let labelText =
-          input.getAttribute("data-label") ||
-          input.getAttribute("aria-label") ||
-          input.getAttribute("placeholder") ||
-          "";
-
-        if (!labelText) {
-          if (name.includes("firstname")) labelText = "First name";
-          else if (name.includes("lastname")) labelText = "Last name";
-          else if (name.includes("email")) labelText = "Email";
-          else if (name.includes("phone")) labelText = "Phone";
-          else if (name.includes("company")) labelText = "Company";
-          else labelText = "Details";
-        }
-
-        const lbl = document.createElement("label");
-        lbl.textContent = labelText;
-        if (input.id) lbl.setAttribute("for", input.id);
-        field.insertBefore(lbl, field.firstChild);
-      });
-    }
-
-    window.addEventListener("load", () => {
-      if (!window.hbspt?.forms?.create) return;
-
-      window.hbspt.forms.create({
-        region: "eu1",
-        portalId: "146828710",
-        formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
-        target: "#hs-form-target",
-        css: "",
-
-        onFormReady: function(container) {
-          const formEl =
-            (container instanceof HTMLElement && (container.matches("form") ? container : container.querySelector("form"))) ||
-            document.querySelector("#hs-form-target form");
-
-          if (!formEl) return;
-
-          setSubmitText(formEl);
-          centerSubmit(formEl);
-          ensureLabels(formEl);
-        }
-      });
+        if (!formEl) return;
+        applyCustomLabelsAndCTA(formEl);
+      }
     });
-  </script>
-</body>
-</html>
+  });
+</script>
