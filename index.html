@@ -1,107 +1,40 @@
-<!DOCTYPE html>
-<html lang="he">
-<head>
-  <meta charset="UTF-8">
-  <title>HubSpot Form</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* labels */
+.hs-form-html .hs-form-field > label {
+  display: block !important;
+  margin-bottom: 6px !important;
+  font-size: 13px !important;
+  color: #cbd5f5 !important;
+  font-weight: 500 !important;
+}
 
-  <style>
-    body {
-      margin: 0;
-      padding: 40px 16px;
-      background: radial-gradient(circle at top, #0b1b33, #020617);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    }
+/* inputs */
+.hs-form-html input[type="text"],
+.hs-form-html input[type="email"] {
+  background: #eef4ff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  padding: 14px 16px !important;
+  font-size: 15px !important;
+}
 
-    .hs-form-html {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 48px;
-      background: linear-gradient(180deg, #020617, #020617);
-      border: 1px solid #1e293b;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
+/* submit button */
+.hs-form-html input[type="submit"] {
+  background: linear-gradient(135deg, #ff7a59, #ff946d) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 14px 34px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 25px rgba(255,122,89,0.4) !important;
+  float: right !important;
+}
 
-    /* layout */
-    .hs-form fieldset {
-      max-width: 100%;
-    }
-
-    .hs-form .hs-form-field {
-      margin-bottom: 20px;
-    }
-
-    /* labels */
-    .hs-form label {
-      color: #cbd5f5;
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 6px;
-      display: block;
-    }
-
-    /* inputs */
-    .hs-form input,
-    .hs-form textarea,
-    .hs-form select {
-      width: 100%;
-      padding: 14px 16px;
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 15px;
-      color: #0f172a;
-      box-sizing: border-box;
-    }
-
-    .hs-form input:focus,
-    .hs-form textarea:focus,
-    .hs-form select:focus {
-      outline: none;
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
-    }
-
-    /* button */
-    .hs-form .hs-button {
-      margin-top: 28px;
-      padding: 16px 36px;
-      background: linear-gradient(135deg, #ff7a59, #ff946d);
-      color: #ffffff;
-      border: none;
-      border-radius: 999px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      float: right;
-      box-shadow: 0 10px 25px rgba(255,122,89,0.35);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .hs-form .hs-button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 35px rgba(255,122,89,0.45);
-    }
-
-    /* errors */
-    .hs-error-msgs label {
-      color: #f87171;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-  </style>
-</head>
-<body>
-
-  <script src="https://js-eu1.hsforms.net/forms/embed/developer/146828710.js" defer></script>
-
-  <div
-    class="hs-form-html"
-    data-region="eu1"
-    data-form-id="fea75d46-afb0-4038-8af4-9057aff3cb3d"
-    data-portal-id="146828710">
-  </div>
-
-</body>
-</html>
+/* hover */
+.hs-form-html input[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 35px rgba(255,122,89,0.5) !important;
+}
+</style>
