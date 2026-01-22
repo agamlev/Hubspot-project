@@ -1,90 +1,50 @@
-:root{
-  --bg: #0f1115;
-  --panel: #141824;
-  --panel-2: #0f1115;
-  --text: #e5e7eb;
-  --muted: #a3a9b6;
-  --border: rgba(255,255,255,0.10);
-  --shadow: 0 18px 60px rgba(0,0,0,0.45);
-  --radius: 18px;
-  --max: 980px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Convert to lead</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  --brand: #7c3aed;
-  --brand-2: #a78bfa;
-  --focus: rgba(167, 139, 250, 0.35);
-}
+  <!-- HubSpot tracking -->
+  <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
 
-*{ box-sizing: border-box; }
-html,body{ height: 100%; }
+  <!-- Site styles -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- HubSpot embed wrapper styles -->
+  <link rel="stylesheet" href="hubspot-form.css" />
+</head>
 
-body{
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(900px 600px at 10% 0%, rgba(124,58,237,0.18), transparent 60%),
-    radial-gradient(700px 520px at 90% 20%, rgba(167,139,250,0.12), transparent 55%),
-    linear-gradient(180deg, #0b0d12, var(--bg));
-}
+<body>
 
-.hero{
-  padding: 72px 20px 36px;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 55%);
-}
+  <header class="hero">
+    <h1>Convert to lead</h1>
+    <p>Fill the form below to create a real HubSpot contact</p>
+  </header>
 
-.hero h1{
-  margin: 0 0 10px;
-  font-size: clamp(30px, 4vw, 42px);
-  letter-spacing: -0.02em;
-}
+  <main class="container">
+    <section class="card cta-card">
+      <h2>Get early access</h2>
+      <p>Leave your details and we’ll be in touch shortly</p>
 
-.hero p{
-  margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-}
+      <div class="hs-embed-wrap">
+        <script src="https://js-eu1.hsforms.net/forms/embed/146828710.js" defer></script>
+        <div
+          class="hs-form-frame"
+          data-region="eu1"
+          data-form-id="fea75d46-afb0-4038-8af4-9057aff3cb3d"
+          data-portal-id="146828710">
+        </div>
+      </div>
 
-.container{
-  width: 100%;
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 28px 20px 44px;
-}
+      <div class="fineprint">
+        Tracking and analytics handled by HubSpot.
+      </div>
+    </section>
+  </main>
 
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(8px);
-}
+  <footer class="footer">
+    Demo environment · HubSpot forms via embed
+  </footer>
 
-.cta-card{
-  padding: 22px;
-}
-
-.cta-card h2{
-  margin: 0 0 6px;
-  font-size: 22px;
-  letter-spacing: -0.01em;
-}
-
-.cta-card > p{
-  margin: 0 0 18px;
-  color: var(--muted);
-}
-
-.fineprint{
-  margin-top: 14px;
-  font-size: 12px;
-  color: rgba(229,231,235,0.65);
-}
-
-.footer{
-  padding: 18px 20px 26px;
-  text-align: center;
-  color: rgba(229,231,235,0.55);
-  font-size: 12px;
-}
+</body>
+</html>
