@@ -1,424 +1,129 @@
-<!doctype html>
-<html lang="he" dir="rtl">
+```html
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>HubSpot Form Dark Landing</title>
+  <title>Convert to lead</title>
 
-  <style>
-    :root{
-      --bg: #0b0f14;
-      --panel: #0f1722;
-      --panel2:#0c121b;
-      --text: #e6edf6;
-      --muted:#9aa7b8;
-      --border:#1f2a3a;
-      --accent:#7dd3fc;
-      --accent2:#a78bfa;
-      --danger:#fb7185;
-      --ok:#34d399;
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius: 18px;
-      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans Hebrew", "Heebo", sans-serif;
-    }
+  <!-- HubSpot tracking -->
+  <script async defer src="https://js-eu1.hs-scripts.com/146828710.js"></script>
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: var(--font);
-      background:
-        radial-gradient(900px 500px at 20% 10%, rgba(167,139,250,.14), transparent 60%),
-        radial-gradient(700px 420px at 80% 15%, rgba(125,211,252,.12), transparent 55%),
-        radial-gradient(900px 700px at 50% 120%, rgba(52,211,153,.08), transparent 55%),
-        var(--bg);
-      color: var(--text);
-      line-height:1.35;
-    }
-
-    a{ color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
-
-    .wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 26px 18px 64px;
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 14px 16px;
-      border:1px solid var(--border);
-      background: rgba(15,23,34,.55);
-      backdrop-filter: blur(10px);
-      border-radius: 999px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-      letter-spacing:.2px;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 6px rgba(125,211,252,.08);
-    }
-    .nav{
-      display:flex;
-      gap:14px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-    .nav a{ color: var(--muted); }
-    .nav a:hover{ color: var(--text); text-decoration:none; }
-
-    .hero{
-      margin-top: 26px;
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 18px;
-      align-items: stretch;
-    }
-    @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
-    }
-
-    .card{
-      border:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(15,23,34,.72), rgba(12,18,27,.66));
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .left{
-      padding: 34px 26px;
-      position: relative;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      border:1px solid rgba(125,211,252,.26);
-      background: rgba(125,211,252,.08);
-      color: var(--text);
-      font-size: 13px;
-    }
-    .badge span{
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    h1{
-      margin: 16px 0 10px;
-      font-size: 38px;
-      line-height: 1.05;
-      letter-spacing: .2px;
-    }
-    .sub{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 62ch;
-    }
-
-    .features{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 10px;
-      margin-top: 22px;
-    }
-    @media (max-width: 520px){
-      .features{ grid-template-columns: 1fr; }
-    }
-    .pill{
-      padding: 10px 12px;
-      border:1px solid var(--border);
-      background: rgba(11,15,20,.35);
-      border-radius: 14px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .pill b{ color: var(--text); font-weight: 650; }
-
-    .right{
-      padding: 18px;
-    }
-    .formHeader{
-      padding: 18px 18px 12px;
-      border-bottom: 1px solid var(--border);
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-    }
-    .formHeader h2{
-      margin:0;
-      font-size: 16px;
-      letter-spacing: .2px;
-    }
-    .formHeader p{
-      margin:6px 0 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .status{
-      font-size: 12px;
-      color: var(--muted);
-      padding: 6px 10px;
-      border-radius: 999px;
-      border:1px solid var(--border);
-      background: rgba(11,15,20,.35);
-      white-space: nowrap;
-    }
-
-    .formBody{
-      padding: 14px 18px 18px;
-    }
-
-    footer{
-      margin-top: 18px;
-      padding: 16px 10px 0;
-      color: var(--muted);
-      font-size: 13px;
-      text-align:center;
-    }
-
-    /* HubSpot form styling */
-    .hs-form *{ font-family: var(--font) !important; }
-
-    .hs-form fieldset{ max-width: 100% !important; }
-    .hs-form .hs-form-field{ margin-bottom: 14px; }
-    .hs-form label{
-      display:block;
-      margin: 0 0 6px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .hs-form .hs-input,
-    .hs-form input[type="text"],
-    .hs-form input[type="email"],
-    .hs-form input[type="tel"],
-    .hs-form textarea,
-    .hs-form select{
-      width: 100% !important;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(11,15,20,.55);
-      color: var(--text);
-      outline: none;
-      transition: border-color .15s ease, box-shadow .15s ease, transform .05s ease;
-    }
-
-    .hs-form textarea{ min-height: 110px; resize: vertical; }
-
-    .hs-form .hs-input:focus,
-    .hs-form input:focus,
-    .hs-form textarea:focus,
-    .hs-form select:focus{
-      border-color: rgba(125,211,252,.55);
-      box-shadow: 0 0 0 6px rgba(125,211,252,.10);
-    }
-
-    .hs-form .hs-button{
-      width: 100% !important;
-      padding: 12px 14px !important;
-      border-radius: 14px !important;
-      border: 1px solid rgba(125,211,252,.55) !important;
-      background: linear-gradient(135deg, rgba(125,211,252,.18), rgba(167,139,250,.16)) !important;
-      color: var(--text) !important;
-      font-weight: 700 !important;
-      letter-spacing: .2px !important;
-      cursor: pointer !important;
-      transition: transform .05s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .hs-form .hs-button:hover{
-      border-color: rgba(125,211,252,.85) !important;
-      box-shadow: 0 0 0 7px rgba(125,211,252,.12);
-    }
-    .hs-form .hs-button:active{ transform: translateY(1px); }
-
-    .hs-form .hs-error-msgs{ margin: 8px 0 0; padding: 0; list-style: none; }
-    .hs-form .hs-error-msgs label{
-      color: var(--danger);
-      font-size: 12px;
-      margin: 6px 0 0;
-    }
-
-    .hs-form .legal-consent-container,
-    .hs-form .hs-richtext{
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 10px;
-    }
-    .hs-form .legal-consent-container a{ color: var(--accent); }
-
-    .hs-form .inputs-list{
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .hs-form .inputs-list li{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding: 6px 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .hs-form input[type="checkbox"],
-    .hs-form input[type="radio"]{
-      margin-top: 3px;
-      accent-color: #7dd3fc;
-    }
-  </style>
+  <!-- Site styles -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Form styles -->
+  <link rel="stylesheet" href="hubspot-form.css" />
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <div class="dot"></div>
-        <div>Marketing Ops Landing</div>
-      </div>
-      <div class="nav">
-        <a href="#form">טופס</a>
-        <a href="#details">פרטים</a>
-      </div>
-    </div>
+  <header class="hero">
+    <h1>Convert to lead</h1>
+    <p>Fill the form below to create a real HubSpot contact</p>
+  </header>
 
-    <div class="hero" id="details">
-      <div class="card left">
-        <div class="badge">
-          <span>Dark mode</span>
-          <strong>דף נחיתה למפתחים</strong>
-        </div>
+  <main class="container">
+    <section class="card cta-card">
+      <h2>Get early access</h2>
+      <p>Leave your details and we’ll be in touch shortly</p>
 
-        <h1>בוא נרים את הטופס שלך בצורה שנראית כמו מוצר.</h1>
-        <p class="sub">
-          עיצוב כהה, נקי ומהיר. הטופס של HubSpot נטען דרך forms/v2.js, עם התאמות DOM להוספת לייבלים במקרה שחסרים.
-        </p>
-
-        <div class="features">
-          <div class="pill"><b>אחיד</b> עם שפת העיצוב של האתר</div>
-          <div class="pill"><b>נגיש</b> עם label לכל שדה</div>
-          <div class="pill"><b>ביצועים</b> טעינה קלה בעמוד אחד</div>
-          <div class="pill"><b>גמיש</b> ניתן לשנות טקסטים בקלות</div>
-        </div>
+      <!-- HubSpot Developer Embed Target -->
+      <div class="hs-embed-wrap">
+        <div class="hs-form-html"
+             data-region="eu1"
+             data-form-id="fea75d46-afb0-4038-8af4-9057aff3cb3d"
+             data-portal-id="146828710"></div>
       </div>
 
-      <div class="card right" id="form">
-        <div class="formHeader">
-          <div>
-            <h2>השארת פרטים</h2>
-            <p>HubSpot embed עם עיצוב מותאם</p>
-          </div>
-          <div class="status" id="formStatus">טוען טופס...</div>
-        </div>
-
-        <div class="formBody">
-          <div id="hubspotForm"></div>
-        </div>
+      <div class="fineprint">
+        Tracking and analytics handled by HubSpot.
       </div>
-    </div>
+    </section>
+  </main>
 
-    <footer>
-      אם רוצים לשנות את טקסט הלייבלים עצמם באופן רשמי, עדיף לעשות זאת בעורך הטופס ב HubSpot, והקוד כאן מטפל גם במקרה שלא מוצגים לייבלים.
-    </footer>
-  </div>
+  <footer class="footer">
+    Demo environment · HubSpot developer embed
+  </footer>
 
-  <!-- HubSpot Forms v2 -->
-  <script charset="utf-8" type="text/javascript" src="https://js-eu1.hsforms.net/forms/v2.js"></script>
+  <!-- HubSpot Developer Embed Script (must be after the target div) -->
+  <script src="https://js-eu1.hsforms.net/forms/embed/developer/146828710.js" defer></script>
 
   <script>
-    // מיפוי אופציונלי לשמות לייבלים אם רוצים לכפות טקסטים
-    // המפתחות הם name של השדה (לרוב HubSpot מייצר אותם)
-    const LABEL_MAP = {
-      firstname: "שם פרטי",
-      lastname: "שם משפחה",
-      email: "אימייל",
-      phone: "טלפון",
-      company: "חברה",
-      message: "הודעה"
-    };
+    // This embed renders asynchronously. We wait for the form DOM, then override labels + CTA.
+    function applyMarketingOverrides(root) {
+      const form = root.querySelector("form");
+      if (!form) return false;
 
-    function ensureLabels(formEl){
-      const fields = formEl.querySelectorAll(".hs-form-field");
-      fields.forEach(field => {
-        const input = field.querySelector("input, textarea, select");
-        if(!input) return;
+      // 1) Force labels by input order (more reliable than name matching across HS configs)
+      const inputs = Array.from(
+        form.querySelectorAll('input.hs-input, input[type="text"], input[type="email"], input[type="tel"]')
+      ).filter(i => i.type !== "hidden");
 
-        // אם כבר יש label אמיתי, לא נוגעים
-        let label = field.querySelector("label");
-        if(label && label.textContent.trim().length > 0) return;
+      const wanted = ["Name", "Last name", "Email"];
 
-        // מנסים להביא כותרת מה placeholder או מהמיפוי
-        const name = (input.getAttribute("name") || "").toLowerCase();
-        const placeholder = (input.getAttribute("placeholder") || "").trim();
-        const text = LABEL_MAP[name] || placeholder || "שדה";
+      wanted.forEach((txt, idx) => {
+        const input = inputs[idx];
+        if (!input) return;
 
-        // מוודאים id כדי לקשר label
-        if(!input.id){
-          input.id = "hs_" + Math.random().toString(16).slice(2);
+        const field = input.closest(".hs-form-field") || input.parentElement;
+        if (!field) return;
+
+        let lbl = field.querySelector(":scope > label");
+        if (!lbl) {
+          lbl = document.createElement("label");
+          field.insertBefore(lbl, field.firstChild);
         }
 
-        label = document.createElement("label");
-        label.setAttribute("for", input.id);
-        label.textContent = text;
-
-        // מצמידים label בתחילת השדה
-        field.insertBefore(label, field.firstChild);
-
-        // אם אין placeholder, מוסיפים אחד עדין
-        if(!placeholder){
-          input.setAttribute("placeholder", text);
-        }
+        lbl.textContent = txt;
+        lbl.style.setProperty("display", "block", "important");
+        lbl.style.setProperty("margin", "0 0 8px", "important");
+        lbl.style.setProperty("font-size", "13px", "important");
+        lbl.style.setProperty("color", "rgba(229,231,235,0.85)", "important");
+        if (input.id) lbl.setAttribute("for", input.id);
       });
-    }
 
-    function setStatus(text){
-      const el = document.getElementById("formStatus");
-      if(el) el.textContent = text;
-    }
+      // 2) Button: center + gray + new text
+      const btn = form.querySelector('input[type="submit"], button[type="submit"]');
+      if (btn) {
+        const cta = "Let’s talk!";
+        if (btn.tagName.toLowerCase() === "input") btn.value = cta;
+        else btn.textContent = cta;
 
-    // יצירת הטופס
-    hbspt.forms.create({
-      region: "eu1",
-      portalId: "146828710",
-      formId: "fea75d46-afb0-4038-8af4-9057aff3cb3d",
-      target: "#hubspotForm",
-
-      // חשוב: כדי שה CSS שלנו ישלוט, מבטלים CSS אוטומטי של HubSpot
-      css: "",
-
-      onFormReady: function($form){
-        const formEl = $form && $form[0] ? $form[0] : document.querySelector("#hubspotForm form");
-        if(formEl){
-          ensureLabels(formEl);
-          setStatus("מוכן");
-        } else {
-          setStatus("נטען");
+        const wrap = btn.closest(".hs_submit") || btn.closest(".actions") || btn.parentElement;
+        if (wrap) {
+          wrap.style.setProperty("display", "flex", "important");
+          wrap.style.setProperty("justify-content", "center", "important");
+          wrap.style.setProperty("width", "100%", "important");
+          wrap.style.setProperty("margin-top", "12px", "important");
         }
-      },
 
-      onFormSubmit: function(){
-        setStatus("שולח...");
-      },
-
-      onFormSubmitted: function(){
-        setStatus("נשלח");
+        btn.style.setProperty("height", "44px", "important");
+        btn.style.setProperty("padding", "0 22px", "important");
+        btn.style.setProperty("border-radius", "12px", "important");
+        btn.style.setProperty("border", "1px solid rgba(255,255,255,0.18)", "important");
+        btn.style.setProperty("background", "rgba(255,255,255,0.14)", "important");
+        btn.style.setProperty("color", "#e5e7eb", "important");
+        btn.style.setProperty("font-weight", "800", "important");
+        btn.style.setProperty("cursor", "pointer", "important");
       }
+
+      return true;
+    }
+
+    window.addEventListener("load", () => {
+      const root = document.querySelector(".hs-form-html");
+      if (!root) return;
+
+      // Retry a bit, then keep watching for DOM changes (HubSpot can rerender)
+      let tries = 0;
+      const t = setInterval(() => {
+        tries += 1;
+        if (applyMarketingOverrides(root) || tries >= 120) clearInterval(t);
+      }, 100);
+
+      const obs = new MutationObserver(() => applyMarketingOverrides(root));
+      obs.observe(root, { childList: true, subtree: true });
     });
   </script>
 </body>
 </html>
+```
